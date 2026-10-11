@@ -1,0 +1,1626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anish Achar · Computer Science &amp; Business, Trinity College Dublin</title>
+<meta name="description" content="Anish Achar, first-year Computer Science & Business student at Trinity College Dublin. Projects include an interactive V8 engine CAD assembly, a flight-simulated and flutter-checked rocket fin can, the NO Candle trading strategy, tuned over 11,142 backtests, and Ghost Ball, an app that reads a pool table from one photo.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://anishachar.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anishachar.com/">
+<meta property="og:site_name" content="Anish Achar">
+<meta property="og:title" content="Anish Achar">
+<meta property="og:description" content="Computer Science & Business at Trinity College Dublin. Software and hardware: a V8 engine in SolidWorks, an algorithmic trading strategy tuned over 11,142 backtests, and a computer-vision pool app.">
+<meta property="og:image" content="https://anishachar.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anish Achar: a render of his V8 engine CAD model on black">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Anish Achar: a render of his V8 engine CAD model on black">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<!-- tells search engines the site's name (and that "anishachar" means this site) and who it belongs to -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://anishachar.com/#website",
+      "url": "https://anishachar.com/",
+      "name": "Anish Achar",
+      "alternateName": ["anishachar", "anishachar.com"],
+      "publisher": { "@id": "https://anishachar.com/#me" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://anishachar.com/#me",
+      "name": "Anish Achar",
+      "alternateName": "anishachar",
+      "url": "https://anishachar.com/",
+      "image": "https://anishachar.com/assets/img/og.jpg",
+      "affiliation": { "@type": "CollegeOrUniversity", "name": "Trinity College Dublin" },
+      "sameAs": ["https://www.linkedin.com/in/anish-achar-b9ba643a2"]
+    }
+  ]
+}
+</script>
+<!-- everything is served from this site (fonts and libraries included), so visitors' browsers contact no one else -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/ghostball.css">
+<link rel="stylesheet" href="assets/css/fincan.css">
+<link rel="stylesheet" href="assets/css/zeto.css">
+<link rel="stylesheet" href="assets/css/fx.css">
+<script>
+  // enable scroll-reveal styles before first paint (no flash); fall back to plain content if main.js never arrives
+  var de = document.documentElement;
+  de.classList.add('js');
+  setTimeout(function () { if (!window.__siteReady) de.classList.remove('js'); }, 4000);
+  // motion follows the device's "reduce motion" setting unless the visitor chose otherwise with the Motion switch
+  var pref = null, seen = null;
+  try { pref = localStorage.getItem('motion'); seen = sessionStorage.getItem('intro'); } catch (e) {}
+  var calm = pref ? pref === 'reduced' : matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calm) de.classList.add('reduce-motion');
+  // a one-second intro, once per visit, when arriving on the home page
+  if (!calm && !seen && /^(#about|#top)?$/.test(location.hash)) de.classList.add('intro');
+  // opened by double-clicking index.html: browsers won't run the site's scripts from a file, so say how to view it
+  if (location.protocol === 'file:') document.addEventListener('DOMContentLoaded', function () {
+    var n = document.createElement('div');
+    n.className = 'file-note'; n.setAttribute('role', 'alert');
+    n.innerHTML = '<b>This page is open as a file, so the tabs, projects and drawings can’t run.</b> To see it properly, double-click <b>Preview website.cmd</b> in the folder that contains the website folder.';
+    document.body.appendChild(n);
+  });
+</script>
+<script type="importmap">
+{ "imports": {
+  "three": "./assets/vendor/three/three.module.min.js",
+  "three/addons/": "./assets/vendor/three/addons/"
+} }
+</script>
+<script type="module" src="assets/js/main.js"></script>
+<script type="module" src="assets/js/ghostball.js"></script>
+</head>
+<body>
+<div class="intro-curtain" aria-hidden="true">
+  <div class="ic-in"><span class="ic-mark">AA</span><span class="ic-name"><span>Anish Achar</span></span><span class="ic-bar"><i></i></span></div>
+</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#about" aria-label="Anish Achar, home"><span class="brand-mark">AA</span><span class="brand-name">anish.achar</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Pages"><span class="nav-pill" aria-hidden="true"></span>
+      <a href="#about" data-tab="about">About</a>
+      <a href="#projects" data-tab="projects">Projects</a>
+      <a href="#experience" data-tab="experience">Experience</a>
+      <a href="#skills" data-tab="skills">Skills</a>
+      <a href="#contact" data-tab="contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="motion-toggle" type="button" aria-pressed="true" title="Turn animations off"><span>Motion</span><span class="mt-switch" aria-hidden="true"></span></button>
+      <a class="btn btn-sm nav-cv" href="assets/Anish_Achar_CV.pdf" download>
+        CV
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ============================================================ ABOUT (home) -->
+<section class="view view-about" id="view-about" data-view="about" aria-label="About">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="hero-who reveal">
+          <img class="avatar" src="assets/img/anish.png" alt="Portrait of Anish Achar" width="64" height="64">
+          <p class="eyebrow" style="margin:0"><span class="dot"></span>Computer Science &amp; Business · Trinity College Dublin</p>
+        </div>
+        <h1 class="hero-name"><span class="ln"><span>Anish</span></span> <span class="ln"><span>Achar</span></span></h1>
+        <p class="hero-lede reveal">I'm interested in two things: the patterns hidden in data, and ideas turned into things you can hold. So I work on both sides of the line, <em>software</em> and <em>hardware</em>.</p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary" href="#projects">
+            See my projects
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0-5-5m5 5-5 5"/></svg>
+          </a>
+          <a class="btn" href="assets/Anish_Achar_CV.pdf" download>
+            Download CV
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg>
+          </a>
+        </div>
+        <dl class="hero-facts reveal">
+          <div><dt>Now</dt><dd>Co-founding <a href="#experience">Resonance</a>, a web start-up for small businesses</dd></div>
+          <div><dt>Based in</dt><dd>Dublin, Ireland<span class="hf-time" id="hf-time"></span></dd></div>
+          <div><dt>Say hi</dt><dd class="hf-hi">
+            <a href="mailto:anishacharuw@gmail.com">anishacharuw@gmail.com</a>
+            <button class="icon-btn copy-mail" type="button" data-copy="anishacharuw@gmail.com" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+              <span class="copied">Copied!</span>
+            </button>
+            <a class="icon-btn" href="https://www.linkedin.com/in/anish-achar-b9ba643a2" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6v5.4h-4v-4.8c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6v4.9h-4z"/></svg>
+            </a>
+          </dd></div>
+        </dl>
+      </div>
+
+      <figure class="hero-fig reveal" aria-label="Animated cross-section through the front two cylinders of my V8">
+        <div class="sheet">
+          <div class="sheet-top"><span>SECTION A–A · CYL 1 / 2</span><span>CRANK <b id="hero-theta">000°</b></span></div>
+          <svg id="hero-svg" viewBox="-400 -372 800 760" role="img" aria-label="Front section of a 90 degree V8: the crankshaft turns and drives two pistons through their connecting rods"></svg>
+          <div class="sheet-foot">
+            <div><span>DRAWING</span>AA-V8-001</div>
+            <div><span>BORE × STROKE</span>99.0 × 92.0 mm</div>
+            <div><span>STROKE</span><b id="hero-state">CYL 1 · POWER</b></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+
+    <div class="wrap">
+      <ul class="hero-stats reveal">
+        <li><a class="spot" href="#projects/v8"><span class="hs-label">Parts in my V8 assembly</span><span class="hs-num" data-count="40">40</span><svg class="hs-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li><a class="spot" href="#projects/trading"><span class="hs-label">Backtests behind my trading strategy</span><span class="hs-num" data-count="11142">11,142</span><svg class="hs-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li><a class="spot" href="#projects/tiktok"><span class="hs-label">Views on my top three study videos</span><span class="hs-num"><span data-count="31">31</span>K+</span><svg class="hs-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+        <li><a class="spot" href="#projects/biking"><span class="hs-label">Bikes rebuilt and donated</span><span class="hs-num">~<span data-count="10">10</span></span><svg class="hs-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- what I work with, on a loop (the copy needed for a seamless loop is added by fx.js) -->
+  <div class="marquee" role="region" aria-label="Skills and interests">
+    <div class="mq-row"><ul class="mq-track"><li>Python</li><li>SolidWorks</li><li>Flight simulation</li><li>Pine Script</li><li>Backtesting</li><li>Technical drawing</li><li>Figma</li><li>JavaScript</li><li>Mechanical diagnostics</li><li>Agile / Scrum</li><li>QA testing</li></ul></div>
+    <div class="mq-row rev"><ul class="mq-track"><li>Cars &amp; engines</li><li>Rockets &amp; aerospace</li><li>Markets &amp; trading</li><li>Bikes &amp; mechanics</li><li>Design &amp; CAD</li><li>Computer vision</li><li>Study content</li><li>Start-ups</li></ul></div>
+  </div>
+
+  <div class="wrap section">
+    <header class="sec-head reveal"><span class="sec-num">01</span><h2>About</h2><span class="sec-rule"></span><p class="sec-kicker">Software ⟷ Hardware</p></header>
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="big">I'm a first-year Computer Science &amp; Business student at Trinity College Dublin, with a strong interest in both software and hardware.</p>
+        <p>On the software side, I'm drawn to data and the patterns within it, from Python scripting to optimising a trading strategy over thousands of backtests. On the hardware side, I like seeing ideas come to life: taking designs from concept sketches to parametric SolidWorks parts and assemblies, then into hands-on mechanical builds.</p>
+        <p>Right now I'm co-founding <strong>Resonance</strong>, a web start-up that rebuilds outdated websites for small businesses.</p>
+      </div>
+      <div class="glance reveal">
+        <h3>At a glance</h3>
+        <dl>
+          <div><dt>Studying</dt><dd>Computer Science &amp; Business, Trinity College Dublin (Year 1)</dd></div>
+          <div><dt>Ambassador</dt><dd>SimpleStudy, through my study videos</dd></div>
+          <div><dt>Volunteering</dt><dd>The Bike Hub, Dublin · Computer literacy, India</dd></div>
+          <div><dt>Work experience</dt><dd>Tata Consultancy Services · Test Triangle</dd></div>
+          <div><dt>Courses</dt><dd>Harvard CS50P · CTY Ireland Robotics</dd></div>
+          <div><dt>Languages</dt><dd>English, Kannada, Hindi</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub-h reveal">Interests</h3>
+    <div class="interests">
+      <article class="interest reveal">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="11" y="5" width="18" height="12" rx="2"/><path d="M11 9h18M11 12h18"/><circle cx="20" cy="21" r="2.4"/><path d="M20 21l-4 11M20 21l4 11"/><circle cx="20" cy="33" r="3.5"/></svg>
+        <h4>Cars &amp; engines</h4>
+        <p>How an engine turns fuel into motion. It's the reason I modelled a V8 one part at a time.</p>
+      </article>
+      <article class="interest reveal">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 6v28M8 34h26"/><path d="M14 14v12M20 10v14M26 16v10M32 8v10"/><rect x="12.5" y="17" width="3" height="6" rx=".6"/><rect x="18.5" y="13" width="3" height="7" rx=".6"/><rect x="24.5" y="18" width="3" height="5" rx=".6"/><rect x="30.5" y="10" width="3" height="5" rx=".6"/></svg>
+        <h4>Markets &amp; trading</h4>
+        <p>Price action, backtesting, and the statistics behind whether a strategy actually holds up.</p>
+      </article>
+      <article class="interest reveal">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="26" r="7"/><circle cx="31" cy="26" r="7"/><path d="M9 26l7-12h10l5 12M16 14l4 12h6M24 10h4M16 14l-2-4h-3"/><circle cx="20" cy="26" r="1.6"/></svg>
+        <h4>Bikes &amp; mechanics</h4>
+        <p>Fixing things by hand: drivetrains, brakes, and rebuilding bikes for people who need them.</p>
+      </article>
+      <article class="interest reveal">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 5l-9 29M20 5l9 29M13.5 26h13"/><circle cx="20" cy="5" r="2"/><path d="M6 34h28" stroke-dasharray="2 3"/></svg>
+        <h4>Design &amp; CAD</h4>
+        <p>Taking a product from concept sketch to parametric model and technical drawing, like the soap dispenser I designed for my Leaving Cert DCG project.</p>
+      </article>
+    </div>
+
+    <!-- shortcuts straight into a project -->
+    <div class="launch-head reveal">
+      <h3 class="sub-h" style="margin:0;flex:1">Jump into a project</h3>
+      <a class="launch-all" href="#projects">All projects →</a>
+    </div>
+    <div class="launcher">
+      <a class="launch spot reveal" href="#projects/v8">
+        <span class="launch-art"><img src="assets/img/v8-model.png" alt="" width="64" height="64"></span>
+        <span class="launch-txt"><b>V8 Engine</b><small>Interactive 3D CAD</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/trading">
+        <span class="launch-art"><svg class="trade-art" data-k="l" aria-hidden="true"></svg></span>
+        <span class="launch-txt"><b>NO Candle Strategy</b><small>11,142 backtests</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/tiktok">
+        <span class="launch-art"><svg viewBox="0 0 48 48" class="tt-glyph" aria-hidden="true"><path d="M27 8v21a6 6 0 1 1-6-6" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M27 8c1 5 4.5 8 9.5 8.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></span>
+        <span class="launch-txt"><b>Study content</b><small>TikTok · SimpleStudy</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/biking">
+        <span class="launch-art"><svg class="bike-art" aria-hidden="true"></svg></span>
+        <span class="launch-txt"><b>Bikes</b><small>Rebuilds &amp; e-bike design</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/ghostball">
+        <span class="launch-art"><svg class="gb-fig gb-launch-svg" viewBox="0 0 64 64" aria-hidden="true"><circle class="b-ghost" cx="22" cy="40" r="13"/><circle class="b-obj" cx="42" cy="25" r="13"/><circle class="b-dot" cx="22" cy="40" r="3"/></svg></span>
+        <span class="launch-txt"><b>Ghost Ball</b><small>Pool app · computer vision</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/fincan">
+        <span class="launch-art"><svg class="fc-launch-svg" viewBox="0 0 64 64" aria-hidden="true"><path class="h" d="M6 32H60"/><rect class="o" x="9" y="27" width="48" height="10" rx="1"/><path class="fin" d="M11 27H31L20 14H11Z"/><path class="fin" d="M11 37H31L20 50H11Z"/></svg></span>
+        <span class="launch-txt"><b>Rocket fin can</b><small>Flight sim · flutter lab</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch spot reveal" href="#projects/zeto">
+        <span class="launch-art"><svg class="zt-launch-svg" viewBox="0 0 64 64" aria-hidden="true"><rect class="s on" x="10" y="17" width="9" height="4" rx="1"/><rect class="s on" x="21" y="17" width="9" height="4" rx="1"/><rect class="s" x="32" y="17" width="9" height="4" rx="1"/><rect class="s" x="43" y="17" width="9" height="4" rx="1"/><rect class="s on" x="10" y="30" width="9" height="4" rx="1"/><rect class="s on" x="21" y="30" width="9" height="4" rx="1"/><rect class="s on" x="32" y="30" width="9" height="4" rx="1"/><rect class="s" x="43" y="30" width="9" height="4" rx="1"/><rect class="s on" x="10" y="43" width="9" height="4" rx="1"/><rect class="s on" x="21" y="43" width="9" height="4" rx="1"/><rect class="s on" x="32" y="43" width="9" height="4" rx="1"/><rect class="s go" x="43" y="43" width="9" height="4" rx="1"/></svg></span>
+        <span class="launch-txt"><b>Zeto</b><small>Team hackathon · Notion sync</small></span>
+        <span class="launch-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="launch launch-more spot reveal" href="#projects">
+        <span class="launch-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span>
+        <span class="launch-txt"><b>All projects</b><small>Plus smaller builds and client work</small></span>
+        <span class="launch-go" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROJECTS -->
+<section class="view" id="view-projects" data-view="projects" aria-label="Projects" hidden>
+  <div class="wrap">
+    <header class="sec-head"><span class="sec-num">02</span><h2>Projects</h2><span class="sec-rule"></span><p class="sec-kicker">Pick one to open</p></header>
+    <div class="proj-layout">
+      <div class="proj-intro">
+        <p class="big">Seven projects, from an engine and a rocket fin can to an app that reads a pool table and a hackathon build with my team.</p>
+        <p>Open a tile to maximise it. Each project has its own space: explore it, then minimise it to choose another.</p>
+        <ol class="proj-index">
+          <li><a href="#projects/v8" data-for="v8"><span>01</span>V8 Engine</a></li>
+          <li><a href="#projects/trading" data-for="trading"><span>02</span>NO Candle Strategy</a></li>
+          <li><a href="#projects/tiktok" data-for="tiktok"><span>03</span>Study content on TikTok</a></li>
+          <li><a href="#projects/biking" data-for="biking"><span>04</span>Bikes &amp; mechanics</a></li>
+          <li><a href="#projects/ghostball" data-for="ghostball"><span>05</span>Ghost Ball</a></li>
+          <li><a href="#projects/fincan" data-for="fincan"><span>06</span>Rocket fin can</a></li>
+          <li><a href="#projects/zeto" data-for="zeto"><span>07</span>Zeto, with my hackathon team</a></li>
+        </ol>
+      </div>
+      <div class="tiles">
+        <a class="tile spot tile-v8" href="#projects/v8" data-project="v8">
+          <span class="tile-art"><img src="assets/img/v8-model.png" alt="" width="720" height="720"></span>
+          <span class="tile-top"><span class="tile-num">01</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">SolidWorks · C# · 3D</span><span class="tile-title">V8 Engine</span><span class="tile-sub">40-part CAD assembly you can take apart</span></span>
+        </a>
+        <a class="tile spot tile-trading" href="#projects/trading" data-project="trading">
+          <span class="tile-art"><svg class="trade-art" data-k="t" aria-hidden="true"></svg></span>
+          <span class="tile-top"><span class="tile-num">02</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">Pine Script · Backtesting</span><span class="tile-title">NO Candle Strategy</span><span class="tile-sub">11,142 backtests across four FX pairs</span></span>
+        </a>
+        <a class="tile spot tile-tiktok" href="#projects/tiktok" data-project="tiktok">
+          <span class="tile-art">
+            <span class="mini-phone" aria-hidden="true">
+              <span class="mp-screen">
+                <span class="mp-play"></span>
+                <span class="mp-handle">@lil_indian_boi</span>
+                <span class="mp-lines"><i></i><i></i></span>
+                <span class="mp-side"><i></i><i></i><i></i></span>
+              </span>
+            </span>
+          </span>
+          <span class="tile-top"><span class="tile-num">03</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">TikTok · SimpleStudy</span><span class="tile-title">Study content</span><span class="tile-sub">31K+ views on my top three videos</span></span>
+        </a>
+        <a class="tile spot tile-biking" href="#projects/biking" data-project="biking">
+          <span class="tile-art"><svg class="bike-art" aria-hidden="true"></svg></span>
+          <span class="tile-top"><span class="tile-num">04</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">The Bike Hub · SolidWorks</span><span class="tile-title">Bikes &amp; mechanics</span><span class="tile-sub">Rebuilds for people in need, and an e-bike kit</span></span>
+        </a>
+        <a class="tile spot tile-ghostball" href="#projects/ghostball" data-project="ghostball">
+          <span class="tile-art"><svg class="gb-fig gb-tile-svg" viewBox="0 0 400 290" aria-hidden="true"><path class="cush" d="M190,30 H312 M368,88 V230"/><circle class="pk" cx="342" cy="58" r="24"/><line class="aim" x1="78" y1="238" x2="203.2" y2="169.6"/><line class="aim-x" x1="203.2" y1="169.6" x2="282.2" y2="126.5"/><line class="obj" x1="250" y1="132" x2="314.6" y2="80.1"/><path class="obj-h" d="M320.2,75.5L314,87L307.7,79.1Z"/><circle class="b-ghost" cx="203.2" cy="169.6" r="30"/><circle class="b-obj" cx="250" cy="132" r="30"/><circle class="b-white" cx="78" cy="238" r="28.2"/><circle class="b-contact" cx="226.6" cy="150.8" r="5"/></svg></span>
+          <span class="tile-top"><span class="tile-num">05</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">JavaScript · Computer vision</span><span class="tile-title">Ghost Ball</span><span class="tile-sub">Finds your easiest pot from one photo of the table</span></span>
+        </a>
+        <a class="tile spot tile-fincan" href="#projects/fincan" data-project="fincan">
+          <span class="tile-art"><svg class="fc-tile-art" aria-hidden="true"></svg></span>
+          <span class="tile-top"><span class="tile-num">06</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">Python · SolidWorks</span><span class="tile-title">Rocket fin can</span><span class="tile-sub">Flutter-checked, with a 3D flutter lab</span></span>
+        </a>
+        <a class="tile spot tile-zeto" href="#projects/zeto" data-project="zeto">
+          <span class="tile-art"><svg class="zt-tile-art" aria-hidden="true"></svg></span>
+          <span class="tile-top"><span class="tile-num">07</span><span class="tile-max" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span></span>
+          <span class="tile-info"><span class="tile-kicker">Lovable · Notion</span><span class="tile-title">Zeto</span><span class="tile-sub">Our hackathon internship tracker</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="more-head">
+      <h3 class="sub-h">More work</h3>
+      <p>Smaller builds, client work and design projects.</p>
+    </div>
+    <div class="more-grid">
+      <article class="more-card wide">
+        <div class="mc-top"><h4>Resonance</h4><span class="status live">Ongoing</span></div>
+        <p>A web start-up I co-founded with a friend. We rebuild outdated websites for small businesses so they’re easier to use and look modern.</p>
+        <ul class="tags"><li>Web design</li><li>Start-up</li></ul>
+      </article>
+      <article class="more-card">
+        <div class="mc-top"><h4>Driving-school scheduler</h4><span class="status live">In progress</span></div>
+        <p>Custom timetabling software for Resonance’s first client, VS Driving School, to schedule and manage driving lessons.</p>
+        <ul class="tags"><li>Scheduling software</li><li>Client work</li></ul>
+      </article>
+      <article class="more-card">
+        <div class="mc-top"><h4>E-bike conversion kit</h4><span class="status">Prototype</span></div>
+        <p>A SolidWorks design that turns a standard bicycle into an e-bike, with the motor and battery mounted on a frame someone already owns.</p>
+        <ul class="tags"><li>SolidWorks</li><li>Mechanical design</li></ul>
+      </article>
+      <article class="more-card">
+        <div class="mc-top"><h4>Soap dispenser</h4><span class="status">Done</span></div>
+        <p>My Leaving Cert DCG project, taken from concept sketches to a parametric model and technical drawings.</p>
+        <ul class="tags"><li>Product design</li><li>DCG</li></ul>
+      </article>
+      <article class="more-card">
+        <div class="mc-top"><h4>Drone delivery app</h4><span class="status">Done</span></div>
+        <p>On work experience at TCS, my team reimagined food delivery as a drone-based system. I designed the app prototype and user journey in Figma.</p>
+        <ul class="tags"><li>Figma</li><li>UX</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ EXPERIENCE -->
+<section class="view" id="view-experience" data-view="experience" aria-label="Experience" hidden>
+  <div class="wrap">
+    <header class="sec-head reveal"><span class="sec-num">03</span><h2>Experience</h2><span class="sec-rule"></span><p class="sec-kicker">Click a role to expand</p></header>
+    <ol class="timeline" data-progress>
+      <li class="job now open reveal">
+        <div class="job-when"><b>Sep 2026</b>Present</div>
+        <div class="job-card spot">
+          <h3 class="job-h"><button class="job-btn" type="button" aria-expanded="true">
+              <span class="job-text"><span class="job-title">Co-Founder <span class="badge">Now</span></span><span class="org"><b>Resonance</b> · Dublin</span></span>
+              <span class="plus" aria-hidden="true"></span>
+            </button></h3>
+          <div class="job-body"><div>
+            <ul>
+              <li>Co-founded a web start-up with a friend that modernises outdated websites for small businesses, redesigning them for usability and a modern look.</li>
+              <li>Building custom timetabling software for our first client, VS Driving School, to schedule and manage driving lessons (work in progress).</li>
+            </ul>
+            <ul class="tags"><li>Web design</li><li>Start-up</li><li>Client work</li><li>Scheduling software</li></ul>
+          </div></div>
+        </div>
+      </li>
+      <li class="job reveal">
+        <div class="job-when"><b>Dec 2025</b>India</div>
+        <div class="job-card spot">
+          <h3 class="job-h"><button class="job-btn" type="button" aria-expanded="false">
+              <span class="job-text"><span class="job-title">Computer Literacy Volunteer</span><span class="org"><b>Community volunteering</b> · India</span></span>
+              <span class="plus" aria-hidden="true"></span>
+            </button></h3>
+          <div class="job-body"><div>
+            <ul>
+              <li>Taught children core computer skills and safe, practical use of technology.</li>
+              <li>Adapted explanations to different ages and learning levels.</li>
+            </ul>
+            <ul class="tags"><li>Teaching</li><li>Digital literacy</li></ul>
+          </div></div>
+        </div>
+      </li>
+      <li class="job reveal">
+        <div class="job-when"><b>Jun 2025</b>Dún Laoghaire</div>
+        <div class="job-card spot">
+          <h3 class="job-h"><button class="job-btn" type="button" aria-expanded="false">
+              <span class="job-text"><span class="job-title">Volunteer Bicycle Mechanic</span><span class="org"><b>The Bike Hub</b> · Dún Laoghaire, Dublin</span></span>
+              <span class="plus" aria-hidden="true"></span>
+            </button></h3>
+          <div class="job-body"><div>
+            <ul>
+              <li>Built and repaired around ten bikes from scratch under an experienced mechanic, fixing drivetrain and brake faults. All were donated to people in need via the local council.</li>
+              <li>Favourite project: a full drivetrain replacement on a badly corroded bike, from the derailleurs and chain through to the cranks and pedals.</li>
+            </ul>
+            <ul class="tags"><li>Mechanical diagnostics</li><li>Drivetrains</li><li>Brakes</li></ul>
+            <a class="job-link" href="#projects/biking">See the Bikes project →</a>
+          </div></div>
+        </div>
+      </li>
+      <li class="job reveal">
+        <div class="job-when"><b>Feb – Mar 2024</b>Work experience</div>
+        <div class="job-card spot">
+          <h3 class="job-h"><button class="job-btn" type="button" aria-expanded="false">
+              <span class="job-text"><span class="job-title">Engineering &amp; Technology Work Experience</span><span class="org"><b>Tata Consultancy Services</b></span></span>
+              <span class="plus" aria-hidden="true"></span>
+            </button></h3>
+          <div class="job-body"><div>
+            <ul>
+              <li>In a small team, tackled an open-ended engineering challenge to reimagine food delivery, and proposed a drone-based system.</li>
+              <li>Designed the app prototype and user journey in Figma.</li>
+            </ul>
+            <ul class="tags"><li>Figma</li><li>UX</li><li>Teamwork</li></ul>
+          </div></div>
+        </div>
+      </li>
+      <li class="job reveal">
+        <div class="job-when"><b>Nov 2023</b>Work experience</div>
+        <div class="job-card spot">
+          <h3 class="job-h"><button class="job-btn" type="button" aria-expanded="false">
+              <span class="job-text"><span class="job-title">Technology Work Experience</span><span class="org"><b>Test Triangle</b> · Blanchardstown, Dublin</span></span>
+              <span class="plus" aria-hidden="true"></span>
+            </button></h3>
+          <div class="job-body"><div>
+            <ul>
+              <li>Shadowed a software tester in an Agile / Scrum team, running functional and usability tests on new websites in sprint cycles.</li>
+              <li>Some of my proposed improvements were implemented.</li>
+            </ul>
+            <ul class="tags"><li>QA testing</li><li>Agile / Scrum</li><li>Usability</li></ul>
+          </div></div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================================ EDUCATION & SKILLS -->
+<section class="view" id="view-skills" data-view="skills" aria-label="Education and skills" hidden>
+  <div class="wrap">
+    <header class="sec-head reveal"><span class="sec-num">04</span><h2>Education &amp; skills</h2><span class="sec-rule"></span></header>
+    <div class="edu-grid">
+      <div class="panel edu reveal">
+        <span class="label">Sep 2026 – Present · Year 1</span>
+        <h3>Computer Science &amp; Business</h3>
+        <div class="where">Trinity College Dublin</div>
+        <div class="when">Dublin, Ireland</div>
+        <span class="big-glyph" aria-hidden="true">TCD</span>
+      </div>
+      <div class="panel edu reveal">
+        <span class="label">2026</span>
+        <h3>Leaving Certificate</h3>
+        <div class="where">The Institute of Education</div>
+        <div class="when">Dublin · incl. Design &amp; Communication Graphics</div>
+        <span class="big-glyph" aria-hidden="true">LC</span>
+      </div>
+    </div>
+
+    <h3 class="sub-h reveal">Skills</h3>
+    <div class="skills-grid">
+      <div class="panel skill-group reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12l9-5M12 12L3 7"/></svg>Engineering &amp; CAD</h4>
+        <div class="chips"><span><b>SolidWorks</b></span><span>Part &amp; assembly modelling</span><span>Technical drawing (DCG)</span><span>Mechanical diagnostics</span><span>Drivetrain &amp; brake servicing</span></div>
+      </div>
+      <div class="panel skill-group reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Software &amp; data</h4>
+        <div class="chips"><span><b>Python</b> · fluent</span><span>Pine Script (TradingView)</span><span>JavaScript · basic</span><span>Backtesting &amp; optimisation</span></div>
+      </div>
+      <div class="panel skill-group reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Product &amp; process</h4>
+        <div class="chips"><span><b>Figma</b> &amp; UI prototyping</span><span>Agile / Scrum</span><span>QA testing</span></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel panel-pad reveal">
+        <h4 style="margin-bottom:10px">Courses</h4>
+        <div class="course"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><div><b>CS50's Introduction to Programming with Python</b><span>Harvard University</span></div></div>
+        <div class="course"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6M2 12v3M22 12v3"/></svg><div><b>Discoveries and Inventions (Robotics)</b><span>CTY Ireland</span></div></div>
+      </div>
+      <div class="panel panel-pad reveal">
+        <h4 style="margin-bottom:14px">Languages</h4>
+        <div class="chips"><span><b>English</b> · fluent</span><span><b>Kannada</b> · fluent</span><span><b>Hindi</b> · fluent</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT -->
+<section class="view view-contact" id="view-contact" data-view="contact" aria-label="Contact" hidden>
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="contact-photo"><img src="assets/img/anish.png" alt="Anish Achar" width="180" height="180"></div>
+      <div>
+        <p class="label" style="margin:0 0 10px">Contact</p>
+        <h2>Let's talk.</h2>
+        <p>I'm always up for a conversation about engines, markets, or something you're building. The quickest way to reach me is email.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:anishacharuw@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            anishacharuw@gmail.com
+          </a>
+          <button class="btn copy-mail" type="button" data-copy="anishacharuw@gmail.com" aria-label="Copy email address">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
+            Copy
+            <span class="copied">Copied!</span>
+          </button>
+          <a class="btn" href="https://www.linkedin.com/in/anish-achar-b9ba643a2" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6v5.4h-4v-4.8c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6v4.9h-4z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="assets/Anish_Achar_CV.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg>
+            Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+  // show the linked tab straight away, before main.js loads, so deep links don't flash the About page
+  (function () {
+    var h = location.hash.slice(1).replace(/^\//, '').split('/')[0];
+    h = { top: 'about', v8: 'projects', strategy: 'projects', more: 'projects', viewer: 'projects' }[h] || h;
+    var v = document.getElementById('view-' + h);
+    if (v && h !== 'about') { document.getElementById('view-about').hidden = true; v.hidden = false; }
+  })();
+</script>
+
+<footer class="footer">
+  <div class="wrap foot-top">
+    <p class="foot-cta">Building something, hiring, or just want to talk? <a class="foot-talk" href="mailto:anishacharuw@gmail.com">Say hi →</a></p>
+    <button class="foot-up" type="button" data-up aria-label="Back to the top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+    </button>
+  </div>
+  <div class="foot-mark" aria-hidden="true"><span>Anish Achar</span></div>
+  <div class="wrap foot-bottom">
+    <span>© <span id="year">2026</span> Anish Achar · Dublin, Ireland</span>
+    <span class="foot-links">
+      <a href="mailto:anishacharuw@gmail.com">Email</a><a href="https://www.linkedin.com/in/anish-achar-b9ba643a2" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="legal.html#privacy">Privacy</a><a href="legal.html#terms">Terms</a><a href="legal.html#accessibility">Accessibility</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ============================================================ MAXIMISED PROJECT -->
+<div class="po" id="po" role="dialog" aria-modal="true" aria-labelledby="po-title" data-lenis-prevent hidden>
+  <div class="po-bar"><span class="po-progress" aria-hidden="true"></span>
+    <span class="po-num" id="po-num">01</span>
+    <span class="po-title" id="po-title">Project</span>
+    <span class="po-sub" id="po-sub"></span>
+    <button class="po-min" id="po-min" type="button" title="Minimise (Esc)" aria-label="Minimise project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg>
+      <span>Minimise</span>
+    </button>
+  </div>
+  <div class="po-body" id="po-body">
+
+    <!-- ------------------------------------------------ 01 V8 -->
+    <article class="po-panel" data-project="v8" hidden>
+      <div class="wrap">
+        <header class="proj-head">
+          <h3 class="proj-title">V8 Engine<span>Full CAD assembly in SolidWorks</span></h3>
+          <ul class="tags"><li>SolidWorks</li><li>C#</li><li>SOLIDWORKS API</li><li>Personal project</li></ul>
+        </header>
+        <div class="viewer" id="viewer">
+          <div class="viewer-stage" id="viewer-stage">
+            <canvas id="v8-canvas" role="img" aria-label="Interactive 3D model of the V8 engine"></canvas>
+            <div class="v-loading" id="v8-loading"><div class="bar"><i></i></div><span id="v8-loading-text">Loading 40 parts…</span></div>
+            <div class="v-title"><div class="label">Interactive model</div><p>Drag to rotate · click a part · click, then scroll to zoom</p></div>
+            <div class="v-tools" role="toolbar" aria-label="Viewer controls">
+              <button type="button" data-act="run" aria-pressed="true" title="Run the engine">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="i-pause"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="i-play" style="display:none"><path d="M7 5v14l12-7z"/></svg>
+                <span class="t-label">Run</span>
+              </button>
+              <button type="button" data-act="explode" aria-pressed="false" title="Exploded view">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+                <span class="t-label">Explode</span>
+              </button>
+              <button type="button" data-act="xray" aria-pressed="true" title="See-through engine block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span class="t-label">X-ray</span>
+              </button>
+              <button type="button" data-act="blueprint" aria-pressed="false" title="Show CAD edges only">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12m0 0l9-5M12 12L3 7"/></svg>
+                <span class="t-label">Blueprint</span>
+              </button>
+              <button type="button" data-act="reset" title="Reset the view">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></svg>
+                <span class="t-label">Reset</span>
+              </button>
+            </div>
+            <div class="v-hud" id="v8-hud">
+              <span><span class="hud-k">Crank</span><span class="hud-v" id="hud-angle">0°</span></span>
+              <span class="firing" id="hud-firing" aria-label="Firing order 1 8 7 2 6 5 4 3"><span class="hud-k">Fires</span></span>
+              <label class="hud-speed"><span class="hud-k">Speed</span><input type="range" id="hud-rpm" min="10" max="240" step="5" value="60" aria-label="Crank speed in rpm"><span class="hud-v" id="hud-rpm-v">60 rpm</span></label>
+            </div>
+            <div class="v-tip" id="v8-tip" hidden></div>
+          </div>
+          <aside class="viewer-side" aria-label="Engine parts">
+            <div class="parts-head"><span class="label">Parts</span><span>13 groups · 40 parts</span></div>
+            <ul class="parts-list" id="parts-list"></ul>
+          </aside>
+        </div>
+
+        <p class="proj-lede" style="margin-top:28px">A <strong>5.7-litre, 90° V8</strong> with a cross-plane crank, based on GM's LS small-block. <strong>18 unique parts, 40 in the assembly</strong>, all mated so that turning the crankshaft drives every piston and rod. The model above uses the real geometry exported from SOLIDWORKS.</p>
+
+        <div class="spec-grid reveal">
+          <div><span class="label">Layout</span><b>90° V8</b></div>
+          <div><span class="label">Crankshaft</span><b>Cross-plane <small>0/90/270/180°</small></b></div>
+          <div><span class="label">Bore × stroke</span><b>99.0 × 92.0 <small>mm</small></b></div>
+          <div><span class="label">Displacement</span><b>≈ 5.7 <small>litres</small></b></div>
+          <div><span class="label">Rod length</span><b>154.8 <small>mm</small></b></div>
+          <div><span class="label">Deck height</span><b>234.95 <small>mm</small></b></div>
+          <div><span class="label">Firing order</span><b>1-8-7-2-6-5-4-3</b></div>
+          <div><span class="label">Parts</span><b>18 unique <small>/ 40 total</small></b></div>
+        </div>
+
+        <div class="build-grid">
+          <div class="panel panel-pad reveal">
+            <h4>How it was built</h4>
+            <p class="sub">Parametric from end to end, so the whole engine can be regenerated.</p>
+            <ol class="steps">
+              <li><h5>One spec sheet</h5><p>Every dimension lives in a single <b>Spec</b> class: bore, stroke, rod length, deck height, bore spacing and bank stagger.</p></li>
+              <li><h5>18 parts, 145 features</h5><p>Each part is built from sketches, extrudes, revolves and cuts, generated by a <b>C# program that drives the SOLIDWORKS API</b>.</p></li>
+              <li><h5>Assembly &amp; mates</h5><p>Pistons ride on their bore axes, and rods link wrist pins to crank pins. The banks are staggered <b>23.8 mm</b> so each pair of rods shares one crank journal.</p></li>
+              <li><h5>Verified</h5><p>Piston positions match the slider-crank equation to <b>0.0000 mm</b> through a full turn, and interference detection finds <b>no clashes</b>.</p></li>
+            </ol>
+          </div>
+          <div class="panel panel-pad reveal">
+            <div class="code-cap"><span>Parts.cs · the slider-crank equation</span><span>C#</span></div>
+<pre class="code"><code><span class="c">// distance from the crank centreline to the</span>
+<span class="c">// piston pin, measured along the bore axis</span>
+<span class="k">public static</span> <span class="t">double</span> <span class="f">PistonPinDist</span>(<span class="t">int</span> cyl, <span class="t">double</span> crankDeg)
+{
+    <span class="k">var</span> c = <span class="f">CrankPin</span>(<span class="f">ThrowOf</span>(cyl), crankDeg);
+    <span class="k">var</span> u = <span class="f">U</span>(<span class="f">Sigma</span>(cyl));     <span class="c">// bank axis, ±45°</span>
+    <span class="t">double</span> along = <span class="t">V2</span>.<span class="f">Dot</span>(c, u);
+    <span class="t">double</span> perp  = <span class="t">V2</span>.<span class="f">Cross</span>(u, c);
+    <span class="k">return</span> along + <span class="t">Math</span>.<span class="f">Sqrt</span>(RodLen * RodLen - perp * perp);
+}</code></pre>
+            <p class="sub" style="margin:14px 0 0">The 3D model above runs on the same equation, so every piston and rod on this page is where the CAD model says it should be.</p>
+          </div>
+        </div>
+
+        <div class="renders reveal">
+          <figure><img src="assets/img/v8-isometric.jpg" alt="SOLIDWORKS render of the complete V8, isometric view" loading="lazy" width="1680" height="878"><figcaption>SOLIDWORKS · isometric</figcaption></figure>
+          <figure><img src="assets/img/v8-rotating.jpg" alt="SOLIDWORKS render of the crankshaft, rods, pistons, balancer and flywheel" loading="lazy" width="1680" height="878"><figcaption>SOLIDWORKS · rotating assembly</figcaption></figure>
+          <figure><img src="assets/img/v8-front.jpg" alt="SOLIDWORKS render of the V8 from the front" loading="lazy" width="1680" height="878"><figcaption>SOLIDWORKS · front</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- ------------------------------------------------ 02 Trading -->
+    <article class="po-panel" data-project="trading" hidden>
+      <div class="wrap">
+        <header class="proj-head">
+          <h3 class="proj-title">NO Candle Strategy<span>Algorithmic trading, from rules to 11,142 backtests</span></h3>
+          <ul class="tags"><li>Pine Script</li><li>TradingView</li><li>Backtesting</li><li>Optimisation</li><li>AI-assisted development</li></ul>
+        </header>
+        <p class="proj-lede">A rule-based price-action strategy I wrote in Pine Script on TradingView, then tuned with <strong>11,142 backtests</strong> on four currency pairs (15-minute charts, 30 Nov 2025 to 25 Sep 2026, $100K test account). The original settings <strong>lost money on every pair</strong>. The tuned versions are profitable on all four, trading both long and short.</p>
+
+        <div class="kpis reveal">
+          <div class="kpi"><span class="label">Backtests</span><b>11,142</b><p>Settings combinations run in the TradingView Strategy Tester</p></div>
+          <div class="kpi"><span class="label">Pairs profitable</span><b>4 / 4</b><p>Up from 0 / 4 with the original settings</p></div>
+          <div class="kpi"><span class="label">Profit factor</span><b>1.64–1.96</b><p>Gross profit ÷ gross loss for the tuned scripts</p></div>
+          <div class="kpi"><span class="label">Max drawdown</span><b>1.9–2.6%</b><p>At 75% of equity per trade, the largest size with no margin calls</p></div>
+        </div>
+
+        <div class="panel how reveal" id="how">
+          <div class="how-chart">
+            <svg id="how-svg" viewBox="0 0 720 400" role="img" aria-label="Illustrated price chart showing the parts of the NO Candle strategy"></svg>
+            <span class="how-note">Illustration, not real price data</span>
+          </div>
+          <ol class="how-steps" id="how-steps">
+            <li class="how-step" data-step="1"><button type="button"><span class="n">1</span><span class="hs-t">Trend filter</span><span class="hs-d">Decides which way setups can trade. There are four modes: <em>internal</em> market structure (swing highs and lows found with a pivot length), an <em>EMA</em>, both together, or either one. Tested: pivot <code>1–5</code>, EMA <code>50–300</code>.</span></button></li>
+            <li class="how-step" data-step="2"><button type="button"><span class="n">2</span><span class="hs-t">The NO candle</span><span class="hs-d">The core signal: a candle that opens right at its high or its low, with no wick on the open side. <em>Wick tolerance</em> sets how exact that has to be, <code>0–10</code> ticks.</span></button></li>
+            <li class="how-step" data-step="3"><button type="button"><span class="n">3</span><span class="hs-t">Setup window</span><span class="hs-d">Each NO candle creates a setup that stays live for a set number of candles (<em>validity</em> <code>3–20</code>), with a cap on how many can be pending at once (<code>1–5</code>).</span></button></li>
+            <li class="how-step" data-step="4"><button type="button"><span class="n">4</span><span class="hs-t">Stop loss</span><span class="hs-d">Two families: a multiple of the NO candle's range (<code>0.5–6×</code>), or the last swing point, with an optional tick buffer and the option to go beyond that candle's wick.</span></button></li>
+            <li class="how-step" data-step="5"><button type="button"><span class="n">5</span><span class="hs-t">Target &amp; direction</span><span class="hs-d">Profit is taken at a fixed <em>reward:risk</em> multiple of the stop distance (<code>0.5–3</code>). The strategy can trade longs, shorts, or both.</span></button></li>
+          </ol>
+        </div>
+
+        <div class="pipeline reveal">
+          <div class="pipe"><span class="label">Step 1 · Baseline</span><h4>Original settings</h4><p>Lost money on all four pairs, from <b>−$31</b> (GBPJPY) to <b>−$280</b> (GBPUSD).</p></div>
+          <div class="pipe"><span class="label">Step 2 · Sweep</span><h4>One at a time</h4><p>Move each setting on its own away from the baseline to find which ones matter.</p></div>
+          <div class="pipe"><span class="label">Step 3 · Descent</span><h4>Coordinate descent</h4><p>Improve one setting at a time until nothing helps, restarting from <b>12</b> different starts to avoid local optima.</p></div>
+          <div class="pipe"><span class="label">Step 4 · Grid</span><h4>Full grid + polish</h4><p>Test every combination of the settings that interact most (wick tolerance × stop × reward:risk) around the winners.</p></div>
+          <div class="pipe"><span class="label">Step 5 · Guardrails</span><h4>Pick &amp; size</h4><p>Keep only settings with <b>≥ 100 trades</b> and no worse a drawdown than the original, then test size and leverage.</p></div>
+        </div>
+        <p class="ranges reveal"><b>Ranges tested:</b> trend mode (all 4) · pivot 1–5 · EMA 50–300 · validity 3–20 · pending 1–5 · wick tolerance 0–10 ticks · swing-stop buffer 0–20 ticks, with or without the wick · NO-range stop 0.5–6× · reward:risk 0.5–3 · direction · position size 5–100% · leverage 10×, 20×, 50×.</p>
+
+        <div class="explorer-head reveal">
+          <div>
+            <h4>Results by pair</h4>
+            <p>Everything below is at 10% of equity per trade unless it says otherwise, so the settings compare directly.</p>
+          </div>
+          <div class="seg" role="group" aria-label="Currency pair" id="pair-seg"></div>
+        </div>
+
+        <div id="explorer" aria-live="polite">
+          <div class="ex-grid">
+            <div class="panel panel-pad reveal">
+              <h4 id="eq-title">Equity curve</h4>
+              <p class="sub" id="eq-sub"></p>
+              <ul class="legend" id="eq-legend"></ul>
+              <div class="chart" id="eq-chart"></div>
+            </div>
+            <div class="panel panel-pad reveal">
+              <h4>Tuned vs original</h4>
+              <p class="sub" id="stat-sub"></p>
+              <dl class="stat-list" id="stat-list"></dl>
+            </div>
+          </div>
+
+          <div class="ex-grid even">
+            <div class="panel panel-pad reveal">
+              <h4 id="sc-title">Every backtest</h4>
+              <p class="sub" id="sc-sub"></p>
+              <ul class="legend" id="sc-legend"></ul>
+              <div class="chart" id="sc-chart"></div>
+              <details class="tv"><summary>Top 10 settings as a table</summary><div class="table-wrap" id="top-table"></div></details>
+            </div>
+            <div class="panel panel-pad reveal">
+              <h4>Settings</h4>
+              <p class="sub">The pair script's defaults next to the original. A dot marks each setting the tuning changed.</p>
+              <div class="table-wrap"><table class="settings-table" id="settings-table"></table></div>
+            </div>
+          </div>
+
+          <div class="explorer-head reveal" style="margin-top:40px">
+            <div>
+              <h4 style="font-size:20px">Sensitivity</h4>
+              <p>Net profit when one setting is changed and the rest stay at the tuned values. The coloured bar is the chosen value; faded bars break a guardrail.</p>
+            </div>
+          </div>
+          <div class="sens-grid" id="sens-grid"></div>
+
+          <div class="ww panel panel-pad reveal" style="margin-top:14px">
+            <div class="worked"><h5>What worked</h5><ul id="ww-worked"></ul></div>
+            <div class="failed"><h5>What didn't</h5><ul id="ww-failed"></ul></div>
+          </div>
+        </div>
+
+        <div class="explorer-head reveal">
+          <div>
+            <h4>Scaling up: position size &amp; leverage</h4>
+            <p>The same four scripts with bigger positions. 75% of equity per trade is the largest size with no margin calls on any pair.</p>
+          </div>
+          <div class="seg" role="group" aria-label="Leverage" id="lev-seg"></div>
+        </div>
+        <div class="ex-grid even">
+          <div class="panel panel-pad reveal">
+            <h4>Net profit by position size</h4>
+            <p class="sub">$100K account. At 100% every pair hits hundreds of margin calls, and the results collapse.</p>
+            <ul class="legend" id="size-legend"></ul>
+            <div class="chart" id="size-chart"></div>
+          </div>
+          <div class="panel panel-pad reveal">
+            <h4 id="lev-title">Return vs the S&amp;P 500</h4>
+            <p class="sub" id="lev-sub"></p>
+            <ul class="legend" id="lev-legend"></ul>
+            <div class="chart" id="lev-chart"></div>
+            <details class="tv"><summary>All leverage levels as a table</summary><div class="table-wrap" id="lev-table"></div></details>
+          </div>
+        </div>
+
+        <div class="panel panel-pad caveats reveal">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></div>
+          <div>
+            <h4>Honest caveats</h4>
+            <ul>
+              <li>These are <strong>backtests on a simulated $100K TradingView account, not live trading</strong>. Past results don’t predict future ones, and nothing here is financial advice or a recommendation to trade. Leveraged forex trading can lose more than you put in.</li>
+              <li>All results are <strong>in-sample</strong>: the settings were tuned and measured on the same ten months of data. The next step is a walk-forward, out-of-sample test.</li>
+              <li>No spread or commission is modelled, so live results would be lower, especially at high leverage.</li>
+              <li>Many regulators cap retail forex leverage (e.g. 30:1 on majors in the UK and EU), so the 50× figures are a stress test, not a plan.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ------------------------------------------------ 03 TikTok -->
+    <article class="po-panel" data-project="tiktok" hidden>
+      <div class="wrap">
+        <div class="tt-grid">
+          <div class="tt-phone-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="phone-screen">
+                <div class="ps-glow"></div>
+                <div class="ps-top"><span>Following</span><b>For You</b></div>
+                <div class="ps-play"></div>
+                <div class="ps-side"><i></i><i></i><i></i><i></i></div>
+                <div class="ps-caption"><b>@lil_indian_boi</b><span>Leaving Cert prep, documented</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="tt-copy">
+            <header class="proj-head">
+              <h3 class="proj-title">Study content creator<span>TikTok · SimpleStudy brand ambassador</span></h3>
+              <ul class="tags"><li>Content creation</li><li>Community</li><li>Brand partnership</li></ul>
+            </header>
+            <p class="proj-lede">I documented my Leaving Cert preparation on TikTok as <strong>@lil_indian_boi</strong>, reaching <strong>thousands of students</strong> and motivating them to reach their own academic goals. That led to becoming a <strong>brand ambassador for SimpleStudy</strong>, promoting its study resources to students.</p>
+            <div class="tt-stats">
+              <div><span class="label">Audience</span><b>31K+ views</b><small>on my top three videos</small></div>
+              <div><span class="label">Subject</span><b>Leaving Cert</b><small>my own 2026 preparation</small></div>
+              <div><span class="label">Partnership</span><b>SimpleStudy</b><small>brand ambassador</small></div>
+            </div>
+            <a class="btn btn-primary" href="https://www.tiktok.com/@lil_indian_boi" target="_blank" rel="noopener">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M27 8v21a6 6 0 1 1-6-6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M27 8c1 5 4.5 8 9.5 8.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+              Watch @lil_indian_boi on TikTok
+            </a>
+          </div>
+        </div>
+
+        <h3 class="sub-h">Most-watched videos</h3>
+        <p class="tt-note">My three most-viewed videos, with over 31,000 views between them.</p>
+        <ol class="tt-top">
+          <li>
+            <img src="assets/media/tiktok/top-1-road-to-625.jpg" width="341" height="455" loading="lazy" alt="Thumbnail: a motion-blurred clip with the episode title on screen">
+            <span class="tt-vid-txt"><span class="tt-views"><b>13.7K</b> views</span><span class="tt-title">Road to 625: Maths revision, Ep 9</span></span>
+          </li>
+          <li>
+            <img src="assets/media/tiktok/top-2-maths-p1-speedrun.jpg" width="346" height="461" loading="lazy" alt="Thumbnail: a stopwatch above a Maths Paper 1 question being worked on a tablet">
+            <span class="tt-vid-txt"><span class="tt-views"><b>9,017</b> views</span><span class="tt-title">Speed-running a whole Maths Paper 1 in about 90 minutes</span></span>
+          </li>
+          <li>
+            <img src="assets/media/tiktok/top-3-light-5hr-revision.jpg" width="336" height="448" loading="lazy" alt="Thumbnail: my desk set up for a long revision session">
+            <span class="tt-vid-txt"><span class="tt-views"><b>8,784</b> views</span><span class="tt-title">Light 5-hour revision</span></span>
+          </li>
+        </ol>
+
+        <h3 class="sub-h">SimpleStudy ambassador</h3>
+        <div class="tt-amb panel">
+          <div>
+            <span class="label">Brand partnership</span>
+            <p class="tt-amb-p">My study videos led to a place on <strong>SimpleStudy’s Ambassador Program</strong>, promoting its study resources to other students.</p>
+          </div>
+          <figure class="tt-mail">
+            <img src="assets/media/tiktok/simplestudy-welcome.jpg" width="1074" height="894" loading="lazy" alt="Email from the SimpleStudy Team: Welcome to the SimpleStudy Ambassador Program, we’re excited to have you on board.">
+            <figcaption>The welcome email from the SimpleStudy team</figcaption>
+          </figure>
+        </div>
+
+        <div class="media-wrap" data-media-wrap hidden>
+          <h3 class="sub-h">Clips</h3>
+          <div class="media-grid" data-media="tiktok"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ------------------------------------------------ 04 Biking -->
+    <article class="po-panel" data-project="biking" hidden>
+      <div class="wrap">
+        <header class="proj-head">
+          <h3 class="proj-title">Bikes &amp; mechanics<span>Rebuilding bikes at The Bike Hub · an e-bike kit in SolidWorks</span></h3>
+          <ul class="tags"><li>Mechanical diagnostics</li><li>Drivetrains</li><li>Brakes</li><li>SolidWorks</li><li>Volunteering</li></ul>
+        </header>
+        <p class="proj-lede">In June 2025 I volunteered at <strong>The Bike Hub</strong> in Dún Laoghaire, building and repairing <strong>around ten bikes</strong> from scratch under an experienced mechanic. Every one was <strong>donated to people in need</strong> through the local council. Separately, I designed an <strong>e-bike conversion kit</strong> in SolidWorks.</p>
+
+        <div class="bike-explorer panel" id="bike-explorer">
+          <div class="bike-stage">
+            <div class="label bike-label">Hover a part · click for details</div>
+            <svg class="bike-svg" role="img" aria-label="Line drawing of a bicycle with its drivetrain, brakes, wheels and frame"></svg>
+          </div>
+          <aside class="viewer-side bike-side" aria-label="Bike parts">
+            <div class="parts-head"><span class="label">What I worked on</span><span>9 areas</span></div>
+            <ul class="parts-list bike-parts"></ul>
+          </aside>
+        </div>
+
+        <div class="ex-grid even bike-cards">
+          <div class="panel panel-pad">
+            <span class="label">Jun 2025 · Dún Laoghaire</span>
+            <h4 style="margin-top:8px">Volunteer bicycle mechanic</h4>
+            <ul class="tt-list">
+              <li>Built and repaired around ten bikes from scratch under an experienced mechanic, fixing drivetrain and brake faults.</li>
+              <li>All of them were donated to people in need via the local council.</li>
+              <li>Favourite project: a full drivetrain replacement on a badly corroded bike, from the derailleurs and chain through to the cranks and pedals.</li>
+            </ul>
+          </div>
+          <div class="panel panel-pad">
+            <span class="label">SolidWorks · Personal project</span>
+            <h4 style="margin-top:8px">E-bike converter</h4>
+            <ul class="tt-list">
+              <li>Designed a prototype conversion kit that turns a standard bicycle into an e-bike.</li>
+              <li>Worked out how to mount the motor and battery on an existing frame, so the kit fits a bike someone already owns.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="media-wrap" data-media-wrap hidden>
+          <h3 class="sub-h">Photos</h3>
+          <div class="media-grid" data-media="biking"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ------------------------------------------------ 05 Ghost Ball -->
+    <article class="po-panel" data-project="ghostball" hidden>
+      <div class="wrap gb">
+        <header class="proj-head">
+          <h3 class="proj-title">Ghost Ball<span>A phone app that reads a pool table from one photo and shows you the easiest pot</span></h3>
+          <ul class="tags"><li>JavaScript</li><li>Computer vision</li><li>Geometry</li><li>Probability</li><li>Canvas</li><li>AI-assisted development</li></ul>
+        </header>
+
+        <!-- ============ why ============ -->
+        <div class="gb-why">
+          <span class="label">Inspiration</span>
+          <blockquote>
+            <p>To put it simply, I was sick of my friends beating me at pool, so I set out to build a program that would give me an edge.</p>
+            <p>The more I looked, the more patterns I saw: the same shots kept coming up again and again. Once I’d done the maths, it all made sense.</p>
+            <p>Hence <strong>Ghost Ball</strong>: a program that just shows you the shot, instead of boring you with the details.</p>
+          </blockquote>
+        </div>
+        <p class="proj-lede">Take one photo of the table from above. Ghost Ball finds the table, flattens the perspective and picks out every ball, including the white. It works out every pot on the table, <strong>straight, off a cushion, or through another ball</strong>, ranks them by the chance you’d make them at your level, and draws the best one: where to aim, where to strike the white, and where the white goes next. It all runs in the browser on your phone; the photo never leaves it.</p>
+        <div class="gb-actions">
+          <button class="btn btn-primary" type="button" data-gb-scroll="gb-live">
+            Try it yourself
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m0 0-5-5m5 5 5-5"/></svg>
+          </button>
+          <button class="btn" type="button" data-gb-scroll="gb-maths">
+            How it works
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m0 0-5-5m5 5 5-5"/></svg>
+          </button>
+        </div>
+
+        <figure class="gb-video">
+          <div class="gb-frame">
+            <video id="gb-video" controls playsinline preload="none" poster="assets/img/ghostball/gb-reel-poster.jpg" aria-label="Ghost Ball reel, 80 seconds, with subtitles in the picture">
+              <source src="assets/media/ghostball/ghostball-reel.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>Ghost Ball in 80 seconds: one photo, the maths, then the shot. Subtitles are built into the video.</figcaption>
+          <details class="tv gb-transcript">
+            <summary>Read the transcript</summary>
+            <p>Fifteen balls. Six pockets. So which shot is actually on?</p>
+            <p>This is Ghost Ball. Take one photo from above. It finds the table, flattens the perspective, and picks out every ball. Missed something? Fix the corners, add a ball, or tap the white yourself.</p>
+            <p>Then the maths takes over. It finds the ghost ball: exactly where the white must be at contact. It measures how much room the pocket gives, and turns your aim error into a real pot chance. Fifty-nine percent for a beginner. Ninety-nine if you’re strong.</p>
+            <p>Straight pots. Banks. Kicks. Combinations. Every shot on the table, ranked best first. Plus where to strike the white, and where it goes next.</p>
+            <p>Ghost Ball. Know your shot before you take it.</p>
+          </details>
+        </figure>
+
+        <div class="kpis">
+          <div class="kpi"><span class="label">Input</span><b>1 photo</b><p>From above, with all four corner pockets in frame</p></div>
+          <div class="kpi"><span class="label">Shot types</span><b>4</b><p>Straight, bank, kick and combination pots</p></div>
+          <div class="kpi"><span class="label">Sample table</span><b>23 pots</b><p>Every pot it found on the demo table, ranked by chance</p></div>
+          <div class="kpi"><span class="label">Runs on</span><b>Your phone</b><p>The vision and the maths run in the browser</p></div>
+        </div>
+
+        <!-- ============ the real app ============ -->
+        <div class="gb-h" id="gb-live"><h4>Try it yourself</h4><span class="gb-k">The real app, not a recording</span></div>
+        <div class="gb-live">
+          <div class="gb-live-copy">
+            <p class="gb-live-lede">This is Ghost Ball itself. It opens on a sample table with the best shot already drawn, so you can start straight away.</p>
+            <ul class="gb-list">
+              <li><span class="gb-n">01</span><span><b>Tap any ball</b> to see its best pot, or pick one from the list of other pots.</span></li>
+              <li><span class="gb-n">02</span><span><b>Change the table, your colour or your level</b> and watch the odds move.</span></li>
+              <li><span class="gb-n">03</span><span><b>Load another sample table</b> for a new layout, or <b>use your own photo</b> of a table taken from straight above.</span></li>
+            </ul>
+            <a class="btn btn-primary" href="ghost-ball/" target="_blank" rel="noopener">
+              Open the app full screen
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+            <p class="gb-cap">At a real table, open it on your phone and use Take photo. Your photo never leaves your device.</p>
+          </div>
+          <div class="gb-live-frame">
+            <div class="gb-device"><iframe title="Ghost Ball, the app, running inside this page" data-src="ghost-ball/"></iframe></div>
+          </div>
+        </div>
+
+        <!-- ============ timeline ============ -->
+        <div class="gb-h"><h4>Timeline</h4><span class="gb-k">From losing at pool to an app</span></div>
+        <ol class="gb-tl" data-progress>
+          <li class="reveal"><span class="gb-tl-when">Before</span><div><h5>Losing, a lot</h5><p>My friends kept beating me at pool, and I wanted an edge.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Before</span><div><h5>Spotting the patterns</h5><p>The more I played, the more the same shots came round again: the same cuts, the same angles into the same pockets.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Before</span><div><h5>The maths clicks</h5><p>Working through the geometry, it all made sense. Every pot comes down to one spot the white has to reach: the ghost ball.</p></div></li>
+          <li class="reveal"><span class="gb-tl-when">Sun 4 Oct</span><div><h5>Keep it simple</h5><p>I settled on the simplest version that could work: one photo from straight above in, the best shot drawn on it out. No camera rig, no projector.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Sun 4 Oct</span><div><h5>The first version</h5><p>Find the table, flatten it, find the balls, solve the pots, draw the answer. I tested it on tables the app draws itself, where it knows where every ball really is, so every miss shows up.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Sun 4 Oct</span><div><h5>Rebuilt for the phone</h5><p>On a phone, the first version looked like a desktop page and choosing a photo did nothing. I rebuilt it phone-first: a camera bar at the bottom, a close-up of the contact, and corners you can drag under a magnifier.</p></div></li>
+          <li class="reveal"><span class="gb-tl-when">Mon 5 Oct</span><div><h5>Beyond straight pots</h5><p>Banks, kicks and combinations, all from the same window maths, every one ranked by the chance of potting it.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Mon 5 Oct</span><div><h5>Where the white goes</h5><p>The white’s path after contact, a spin guide that says where to strike it and why, and how hard to hit.</p></div></li>
+          <li class="mark same reveal"><span class="gb-tl-when">Mon 5 Oct</span><div><h5>First real table</h5><p>I took it to a real table, took one photo, and it found the shot.</p></div></li>
+          <li class="same reveal"><span class="gb-tl-when">Mon 5 Oct</span><div><h5>The explainer and this page</h5><p>A 90-second video and this write-up.</p></div></li>
+          <li class="reveal"><span class="gb-tl-when">Wed 7 Oct</span><div><h5>A sharper reel</h5><p>The 80-second video at the top of this page: tighter, with the maths on screen, replacing the first explainer.</p></div></li>
+          <li class="next reveal"><span class="gb-tl-when">Next</span><div><h5>Fit the odds to real players</h5><p>The error spreads behind each level are my estimates. Next is logging real shots and fitting them, so the percentages are measured, not modelled.</p></div></li>
+        </ol>
+
+        <!-- ============ how it works: a chain of problems ============ -->
+        <div class="gb-h" id="gb-maths"><h4>How it works</h4><span class="gb-k">Every fix uncovers the next problem</span></div>
+        <p class="gb-intro">From one photo to one shot in eight steps. Each step fixes one problem and runs straight into the next. The photos are the app’s own working on its sample table, not mock-ups.</p>
+        <div class="gb-story">
+
+          <section class="panel panel-pad gb-card reveal">
+            <div class="gb-fig-wrap gb-pair">
+              <figure><img src="assets/img/ghostball/gb-1-photo.jpg" width="1200" height="792" loading="lazy" alt="A photo of a pool table taken from above, with the table's playing area outlined in orange and a ring at each corner"><figcaption>The outline it found</figcaption></figure>
+              <figure><img src="assets/img/ghostball/gb-2-flat.jpg" width="1200" height="638" loading="lazy" alt="The same table flattened into an exact rectangle, seen square-on"><figcaption>Flattened through H</figcaption></figure>
+            </div>
+            <div>
+              <h5><span class="gb-n">01</span>The photo is at an angle</h5>
+              <p class="gb-q">Problem</p>
+              <p>Even from above, a phone is never perfectly square to the table. The far end looks smaller, so a line drawn in photo pixels lands in the wrong place on the real table.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>First find the table. The cloth is the most common strong colour in the middle of the photo, so the app keeps the biggest patch of it, fits a straight line to each side (skipping the pocket notches) and intersects the four lines. Then it steps in to the cushion nose, where the brightness changes.</p>
+              <p>Then flatten it. A <strong>homography</strong>, a 3 × 3 matrix <i>H</i>, maps the photo onto a flat table 1200 × 600 units long, exactly 2:1. Each corner gives two equations, so four corners give eight: exactly enough for H’s eight unknowns, solved by Gaussian elimination.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-homography.svg" width="260" height="74" loading="lazy" alt="s times the vector u, v, 1 equals H times the vector x, y, 1, where H is a 3 by 3 matrix of eight unknowns, h 1 1 to h 3 2, with a 1 in the last corner">
+                <span class="gb-where">(x, y) is a pixel in the photo, (u, v) the same point on the flat table</span>
+              </div>
+            </div>
+          </section>
+          <p class="gb-next reveal">The table is flat and measured in real units. <b>But where are the balls?</b></p>
+
+          <section class="panel panel-pad gb-card reveal flip">
+            <div class="gb-fig-wrap gb-pair">
+              <figure><img src="assets/img/ghostball/gb-3-distance.jpg" width="1200" height="816" loading="lazy" alt="Close-up of three touching balls above a glowing map of distance to the cloth, with one bright peak inside each ball"><figcaption>Distance to the cloth: one peak per ball</figcaption></figure>
+              <figure><img src="assets/img/ghostball/gb-4-balls.jpg" width="1200" height="638" loading="lazy" alt="The flattened table with every ball ringed: the white in blue, reds in red, yellows in yellow and the black in grey"><figcaption>Every ball found and named</figcaption></figure>
+            </div>
+            <div>
+              <h5><span class="gb-n">02</span>Balls touch</h5>
+              <p class="gb-q">Problem</p>
+              <p>Anything on the cloth that isn’t cloth-coloured could be a ball. But balls often touch, and a cluster shows up as one blob.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>A <strong>distance transform</strong> scores every non-cloth pixel by how far it is from the cloth. Each ball’s centre is a peak, so touching balls still give separate peaks.</p>
+              <p>Then each ball’s pixels are sorted into white, dark and coloured. The whitest ball is the white and the darkest is the black. Hue splits the rest into reds and yellows, or solids and stripes on a US table.</p>
+            </div>
+          </section>
+          <p class="gb-next reveal">Every ball has a position and a name. <b>So where should the white go?</b></p>
+
+          <section class="panel panel-pad gb-card reveal">
+            <div class="gb-fig-wrap"><svg class="gb-fig" viewBox="0 0 560 290" role="img" aria-label="Ghost ball construction: the ghost ball G sits two radii behind the object ball O on the line to the pocket P; the white C aims at G, a 32 degree cut"><path class="cush" d="M300,22 H498 M550,76 V240"/><circle class="pk" cx="528" cy="46" r="22"/><line class="aim" x1="90" y1="214" x2="354.4" y2="183.9"/><line class="aim-x" x1="354.4" y1="183.9" x2="473.6" y2="170.3"/><line class="obj" x1="392" y1="154" x2="502.5" y2="66.3"/><path class="obj-h" d="M507.6,62.2L501.9,72.6L496.2,65.4Z"/><path class="ang" d="M453.8,172.5A100,100 0 0 0 432.7,121.7"/><text class="tx-b" x="463.4" y="143.7" text-anchor="middle">θ</text><circle class="b-ghost" cx="354.4" cy="183.9" r="24"/><circle class="b-obj" cx="392" cy="154" r="24"/><circle class="b-white" cx="90" cy="214" r="22.6"/><circle class="b-contact" cx="373.2" cy="168.9" r="5"/><line class="dim" x1="370.6" y1="204.2" x2="383" y2="219.9"/><line class="dim" x1="408.2" y1="174.4" x2="420.6" y2="190"/><line class="dim" x1="398.1" y1="200.2" x2="382.1" y2="212.9"/><path class="dim-h" d="M379.3,215.2L382.4,209.5L385.6,213.4Z"/><line class="dim" x1="398.1" y1="200.2" x2="414.1" y2="187.6"/><path class="dim-h" d="M416.9,185.3L413.7,191L410.6,187.1Z"/><text class="tx" x="412" y="214.8" text-anchor="middle">rₒ+r_w</text><text class="tx" x="84" y="260" text-anchor="start">C · WHITE</text><text class="tx" x="324.4" y="235.9" text-anchor="end">G · GHOST BALL</text><text class="tx" x="378" y="118" text-anchor="end">O · OBJECT BALL</text><text class="tx-b" x="510" y="96" text-anchor="end">P</text><text class="tx-c" x="358.5" y="145.4" text-anchor="end">CONTACT</text></svg></div>
+            <div>
+              <h5><span class="gb-n">03</span>Aiming at the ball doesn’t pot it</h5>
+              <p class="gb-q">Problem</p>
+              <p>Send the white straight at the red and the red carries straight on, not into the pocket. The red always leaves along the line between the two centres at the moment they touch.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>Work backwards from the pocket. To send the object ball <i>O</i> towards the pocket <i>P</i>, the white has to arrive touching it on the side away from the pocket. That spot is the <strong>ghost ball</strong>, <i>G</i>. Aim the white’s centre at <i>G</i>, and <i>O</i> sets off towards <i>P</i>.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-ghost.svg" width="336" height="46" loading="lazy" alt="G equals O minus r o plus r w, times u hat; u hat is P minus O divided by its length">
+                <span class="gb-where">rₒ and r_w are the two radii; on a UK table the white is smaller, 47.6 mm against 50.8 mm</span>
+              </div>
+              <p>The <strong>cut angle</strong> θ is the angle between the white’s path and the object ball’s. The app refuses anything over 80°, because those are too thin to judge.</p>
+            </div>
+          </section>
+          <p class="gb-next reveal">That gives one exact line. <b>But a pocket is wider than one line.</b></p>
+
+          <section class="panel panel-pad gb-card reveal flip">
+            <div class="gb-fig-wrap"><svg class="gb-fig" viewBox="0 0 560 310" role="img" aria-label="Pocket window: from the object ball, the directions between the two jaws, each trimmed by the angle a ball radius takes up at that jaw"><path class="cush" d="M60,70 H296 M412,70 H520"/><path class="pk" d="M296,70 Q354.0,-6 412,70 Z"/><circle class="clear" cx="296" cy="70" r="20"/><circle class="clear" cx="412" cy="70" r="20"/><circle class="jaw" cx="296" cy="70" r="3"/><circle class="jaw" cx="412" cy="70" r="3"/><path class="win" d="M166,268L321.4,70L382.4,70Z"/><line class="ray" x1="166" y1="268" x2="296" y2="70"/><line class="ray" x1="166" y1="268" x2="412" y2="70"/><line class="obj" x1="166" y1="268" x2="321.4" y2="70"/><line class="obj" x1="166" y1="268" x2="382.4" y2="70"/><line class="dim" x1="296" y1="70" x2="276" y2="70"/><text class="tx-b" x="270" y="88" text-anchor="end">r</text><text class="tx-o" x="290.7" y="170.7" text-anchor="start">WINDOW</text><circle class="b-obj" cx="166" cy="268" r="20"/><text class="tx" x="196" y="286" text-anchor="start">OBJECT BALL</text><text class="tx" x="282" y="52" text-anchor="end">JAW</text><text class="tx" x="426" y="52" text-anchor="start">JAW</text><text class="tx-b" x="201.4" y="186.2" text-anchor="middle">d₁</text></svg></div>
+            <div>
+              <h5><span class="gb-n">04</span>A pocket isn’t a point</h5>
+              <p class="gb-q">Problem</p>
+              <p>A pocket has width, so a whole range of directions drops. Some pots leave lots of room and some leave almost none, and one aim line can’t tell them apart.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>From the object ball, the two jaws mark out an angle. The ball’s centre has to stay one radius clear of each jaw, which trims a little off each side. Every direction left in between drops: that’s the <strong>pocket window</strong>.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-window.svg" width="381" height="38" loading="lazy" alt="lo equals alpha 1 plus the arcsine of r over d 1; hi equals alpha 2 minus the arcsine of r over d 2">
+                <span class="gb-where">αᵢ is the direction from the ball to jaw i, and dᵢ its distance</span>
+              </div>
+              <p>The solver then works that window back through the collision. By bisection, it finds the range of directions for the white that send the object ball inside it, and aims at the middle.</p>
+            </div>
+          </section>
+          <p class="gb-next reveal">Now the solver knows how much room each pot has. <b>But nobody hits the exact line.</b></p>
+
+          <section class="panel panel-pad gb-card reveal">
+            <div class="gb-fig-wrap gb-fig-text">
+              <table class="gb-table">
+                <thead><tr><th>Level</th><th>Aim spread</th><th>Cut error at 90°</th><th>Cushion spread</th></tr></thead>
+                <tbody>
+                  <tr><td>Beginner</td><td>0.20°</td><td>2.0°</td><td>2.5°</td></tr>
+                  <tr><td>Club</td><td>0.10°</td><td>1.2°</td><td>1.6°</td></tr>
+                  <tr><td>Strong</td><td>0.05°</td><td>0.7°</td><td>1.0°</td></tr>
+                </tbody>
+              </table>
+              <p class="gb-cap">The error spreads (standard deviations) behind each level.</p>
+            </div>
+            <div>
+              <h5><span class="gb-n">05</span>Nobody hits the exact line</h5>
+              <p class="gb-q">Problem</p>
+              <p>Real players miss by fractions of a degree, and the collision magnifies it: a small change in the white’s angle β becomes a bigger change in the object ball’s angle φ, worst on thin cuts. A wide window can still be a bad bet.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>Model the white’s direction as a normal distribution around the aim, with a spread that depends on your level. The app measures the magnification, ∂φ/∂β, numerically, and adds an error for throw and misjudged angles that grows with the sine of the cut.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-sigma.svg" width="291" height="60" loading="lazy" alt="sigma phi equals the square root of: sigma aim times d phi by d beta, squared, plus sigma cut times sine theta, squared">
+                <img class="gb-tex" src="assets/img/ghostball/math-chance.svg" width="271" height="47" loading="lazy" alt="P equals Phi of hi minus phi over sigma phi, minus Phi of lo minus phi over sigma phi">
+                <span class="gb-where">Φ is the normal distribution’s cumulative function: P is the share of shots that land inside the window</span>
+              </div>
+              <p>That P is the pot chance on the shot card, and every pot is ranked by it.</p>
+            </div>
+          </section>
+          <div class="panel panel-pad gb-code">
+            <div class="code-cap"><span>ghost-ball/index.html · a straight pot, end to end (lightly trimmed)</span><span>JavaScript</span></div>
+<pre class="code"><code><span class="k">function</span> <span class="f">potDirect</span>(cue, obj, pk, g, sk) {
+  <span class="k">const</span> C = [cue.x, cue.y], T = [obj.x, obj.y], s = g.r + g.rc;
+  <span class="k">const</span> w = <span class="f">jawWindow</span>(T, pk.jaws, g.r);          <span class="c">// directions that drop</span>
+  <span class="k">const</span> h = w &amp;&amp; <span class="f">hitWindow</span>(C, T, s, w.lo, w.hi); <span class="c">// the white's directions that give them</span>
+  <span class="k">if</span> (!h) <span class="k">return</span> <span class="k">null</span>;
+  <span class="k">const</span> k = h.<span class="f">hit</span>(h.aim);                          <span class="c">// aim at the middle</span>
+  <span class="k">if</span> (k.cut &gt; MAX_CUT) <span class="k">return</span> <span class="k">null</span>;
+  <span class="k">const</span> sd = <span class="t">Math</span>.<span class="f">hypot</span>(sk.sigma * DEG * k.slope, <span class="f">throwSd</span>(sk, k.cut));
+  <span class="k">return</span> { type: <span class="t">'direct'</span>, P: <span class="f">chance</span>(k.phi, h.wlo, h.whi, sd), k };
+}
+<span class="c">// share of a normal error around phi that still lands inside [lo, hi]</span>
+<span class="k">const</span> <span class="f">chance</span> = (phi, lo, hi, sd) =&gt; <span class="f">Phi</span>((hi - phi) / sd) - <span class="f">Phi</span>((lo - phi) / sd);</code></pre>
+          </div>
+          <p class="gb-next reveal">Every straight pot now has a chance. <b>But sometimes there isn’t a straight pot.</b></p>
+
+          <section class="panel panel-pad gb-card reveal flip">
+            <div class="gb-fig-wrap"><svg class="gb-fig" viewBox="0 0 560 300" role="img" aria-label="Bank and kick shots found by mirroring: the pocket (for a bank) or the white (for a kick) is reflected across the cushion, and a straight line to the image gives the bounce point K"><rect class="table" x="14" y="150" width="242" height="136"/><rect class="table-m" x="14" y="32" width="242" height="136"/><line class="rail" x1="14" y1="159" x2="256" y2="159"/><circle class="pk" cx="252" cy="282" r="11"/><circle class="pk-m" cx="252" cy="36" r="11"/><line class="obj-x" x1="131.5" y1="159" x2="252" y2="36"/><line class="obj" x1="60" y1="232" x2="131.5" y2="159"/><line class="obj" x1="131.5" y1="159" x2="239.1" y2="268.9"/><path class="obj-h" d="M242.9,272.7L233.9,268.9L239.3,263.6Z"/><circle class="b-obj" cx="60" cy="232" r="9"/><circle class="jaw" cx="131.5" cy="159" r="3.5"/><text class="tx-b" x="236" y="40" text-anchor="end">P′</text><text class="tx-b" x="236" y="286" text-anchor="end">P</text><text class="tx-b" x="139.5" y="149" text-anchor="start">K</text><text class="tx-b" x="56" y="258" text-anchor="middle">O</text><text class="tx" x="135" y="20" text-anchor="middle">BANK: MIRROR THE POCKET</text><rect class="table" x="304" y="150" width="242" height="136"/><rect class="table-m" x="304" y="32" width="242" height="136"/><line class="rail" x1="304" y1="159" x2="546" y2="159"/><circle class="pk" cx="542" cy="282" r="11"/><line class="aim-x" x1="344" y1="72" x2="413.2" y2="159"/><polyline class="aim" points="344,246 413.2,159 467.5,227.4"/><line class="obj" x1="482" y1="238" x2="527.2" y2="271.1"/><path class="obj-h" d="M531.5,274.3L522,272L526.5,265.9Z"/><circle class="b-ghost" cx="467.5" cy="227.4" r="9"/><circle class="b-obj" cx="482" cy="238" r="9"/><circle class="b-other" cx="408" cy="242" r="9"/><circle class="b-white" cx="344" cy="246" r="8.5"/><circle class="b-white-m" cx="344" cy="72" r="8.5"/><text class="tx-b" x="330" y="76" text-anchor="end">C′</text><text class="tx-b" x="340" y="272" text-anchor="middle">C</text><text class="tx-b" x="421.2" y="149" text-anchor="start">K</text><circle class="jaw" cx="413.2" cy="159" r="3.5"/><text class="tx" x="425" y="20" text-anchor="middle">KICK: MIRROR THE WHITE</text></svg></div>
+            <div>
+              <h5><span class="gb-n">06</span>No straight pot</h5>
+              <p class="gb-q">Problem</p>
+              <p>The ball can be blocked, tight on a cushion, or at an angle no pocket allows. Going off a cushion bends the path, and a bent path breaks all the straight-line maths.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>Don’t bend the path; <strong>unfold the table</strong>. A bounce is a reflection, so for a <strong>bank</strong> the app mirrors the pocket and its jaws across the cushion, and a straight pot at the mirror image <i>P′</i> is a bank into the real pocket. For a <strong>kick</strong> it mirrors the white instead. The mirror line sits one ball radius off the cushion, where the ball’s centre is when it touches. Everything from steps 03 to 05 then works unchanged.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-mirror.svg" width="165" height="21" loading="lazy" alt="P prime equals P x, 2 r minus P y">
+                <span class="gb-where">for the top cushion, with its nose along y = 0</span>
+              </div>
+              <p>Cushions aren’t perfect, so each one adds its own spread to σ<sub>φ</sub>, weighted by how much of the path comes after the bounce.</p>
+            </div>
+          </section>
+          <p class="gb-next reveal">Cushions open up new routes. <b>But sometimes another ball is in the way of every one.</b></p>
+
+          <section class="panel panel-pad gb-card reveal">
+            <div class="gb-fig-wrap"><svg class="gb-fig" viewBox="0 0 560 310" role="img" aria-label="Combination: the white hits ball A at ghost position G1 so that A arrives at G2 and sends ball B into the pocket"><path class="cush" d="M330,18 H502 M550,68 V230"/><circle class="pk" cx="530" cy="40" r="20"/><line class="aim" x1="74" y1="258" x2="220.6" y2="210.2"/><line class="combo" x1="258" y1="196" x2="375.6" y2="151.4"/><line class="obj" x1="408" y1="128" x2="505.2" y2="57.9"/><path class="obj-h" d="M510.5,54L504.3,64.2L498.9,56.7Z"/><circle class="b-ghost" cx="220.6" cy="210.2" r="20"/><circle class="b-ghost" cx="375.6" cy="151.4" r="20"/><circle class="b-combo" cx="258" cy="196" r="20"/><circle class="b-obj" cx="408" cy="128" r="20"/><circle class="b-white" cx="74" cy="258" r="18.8"/><text class="tx" x="74" y="302" text-anchor="middle">WHITE</text><text class="tx-b" x="258" y="242" text-anchor="middle">A</text><text class="tx-b" x="438" y="154" text-anchor="start">B</text><text class="tx-b" x="206.6" y="180.2" text-anchor="end">G₁</text><text class="tx-b" x="361.6" y="121.4" text-anchor="end">G₂</text><text class="tx-b" x="518" y="92" text-anchor="end">P</text></svg></div>
+            <div>
+              <h5><span class="gb-n">07</span>A ball in the way</h5>
+              <p class="gb-q">Problem</p>
+              <p>Sometimes the ball near the pocket isn’t the one you’re aiming for, or it sits right on your line.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>Use it. For a <strong>combination</strong> the window is worked back twice: first the directions ball <i>A</i> must leave in to pot ball <i>B</i>, then the white’s directions that send <i>A</i> that way. The errors compound through both collisions, which is why combinations usually rank below a good straight pot.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-combo.svg" width="301" height="60" loading="lazy" alt="sigma B equals the square root of: sigma A times d phi B by d phi A, squared, plus sigma cut times sine theta 2, squared">
+              </div>
+            </div>
+          </section>
+          <p class="gb-next reveal">Now it can find the most likely pot. <b>But potting the ball isn’t the end of the shot.</b></p>
+
+          <section class="panel panel-pad gb-card reveal flip">
+            <div class="gb-fig-wrap"><svg class="gb-fig" viewBox="0 0 560 340" role="img" aria-label="Where the white goes after contact: stun leaves along the tangent line at 90 degrees to the object ball; top bends it forwards (about 34 degrees off its original line here); screw bends it back"><line class="aim" x1="51" y1="165" x2="280.6" y2="151.2"/><line class="aim-x" x1="280.6" y1="151.2" x2="440.3" y2="141.6"/><line class="obj" x1="318" y1="128" x2="439.9" y2="52.4"/><path class="obj-h" d="M445.5,49L438.6,58.7L433.7,50.8Z"/><line class="stun" x1="280.6" y1="151.2" x2="351.5" y2="265.6"/><path class="stun-h" d="M354.4,270.2L346.4,264.5L352.8,260.5Z"/><polyline class="dim" points="288,163.1 299.9,155.7 292.5,143.8"/><path class="top" d="M280.6,151.2Q304.8,190.3 394.6,242.8"/><path class="top-h" d="M394.6,242.8L384.9,241.5L388.8,235Z"/><text class="tx-top" x="410.2" y="251.9" text-anchor="middle">TOP</text><path class="screw" d="M280.6,151.2Q304.8,190.3 288.1,292.9"/><path class="screw-h" d="M288.1,292.9L285.8,283.4L293.3,284.7Z"/><text class="tx-screw" x="285.2" y="310.7" text-anchor="middle">SCREW</text><text class="tx-stun" x="365.6" y="292.7" text-anchor="start">STUN · 90°</text><circle class="b-ghost" cx="280.6" cy="151.2" r="22"/><circle class="b-obj" cx="318" cy="128" r="22"/><text class="tx-o" x="464.2" y="37.4" text-anchor="middle">OBJECT BALL</text><text class="tx" x="84.6" y="177.2" text-anchor="start">WHITE</text></svg></div>
+            <div>
+              <h5><span class="gb-n">08</span>Where does the white end up?</h5>
+              <p class="gb-q">Problem</p>
+              <p>A pot that sends the white into a pocket afterwards, an in-off, is a foul. One that leaves it in a cluster leaves you nothing next.</p>
+              <p class="gb-q fix">Fix</p>
+              <p>At contact the white loses its speed along the line of centres and keeps the part along the <strong>tangent line</strong>, at 90° to the object ball’s path. Friction then turns its spin into roll. A solid ball has I = ⅖mr², which makes its final velocity five-sevenths of the tangent velocity plus two-sevenths of its spin.</p>
+              <div class="gb-eq">
+                <img class="gb-tex" src="assets/img/ghostball/math-white.svg" width="170" height="24" loading="lazy" alt="v final equals five sevenths of v t, plus two sevenths of s times v">
+                <span class="gb-where">s = 1 for top, 0 for stun, below 0 for screw</span>
+              </div>
+              <p>Top bends the white forwards, about 34° off its line near a half-ball hit, which is where the “30° rule” comes from. Screw bends it back. The app follows each option to the first cushion or ball and suggests stun, unless that would go in-off or into another ball; then it picks top or screw, whichever runs clear. Pace comes from how far both balls travel, with the object ball’s share divided by cos²θ, the fraction of the white’s energy a cut passes on.</p>
+            </div>
+          </section>
+          <p class="gb-next reveal">Put it all together, <b>and one photo gives one shot.</b></p>
+
+          <figure class="panel panel-pad gb-result reveal">
+            <img src="assets/img/ghostball/gb-5-shot.jpg" width="1200" height="792" loading="lazy" alt="The app's drawing of the best shot: the aim line from the white to a dashed ghost ball, and an orange line from the red into the bottom-right pocket">
+            <figcaption>The app’s answer on its sample table: red into the bottom-right, a 56° cut at 88% for a club player, played with stun and a touch of left side.</figcaption>
+          </figure>
+        </div>
+
+        <!-- ============ demo ============ -->
+        <div class="gb-h" id="gb-try"><h4>Play with the maths</h4><span class="gb-k">Drag the balls · the app’s own solver</span></div>
+        <p class="gb-intro">This runs the app’s own solver on a UK 7ft table: straight pots, banks (the red off a cushion) and kicks (the white off a cushion). It starts on the sample table’s best shot. Drag the white or the red, tap a pocket to aim for it, or pick a shot type. The orange wedge is the pocket window, folded at the cushion on a bank; the dashed ring is the ghost ball; the ring on the cushion is where the bounce happens; and the dotted blue line is where a stunned white goes.</p>
+        <div class="panel panel-pad gb-play" data-start='{"C":[752.4,370.6],"T":[1012.3,373.9]}'>
+          <div class="gb-play-stage">
+            <svg class="gb-play-svg" viewBox="-60 -60 1320 720" aria-label="A pool table you can drag the white and a red ball around on; the best pot is drawn as you go"></svg>
+            <p class="gb-play-hint">Drag a ball, or focus it and use the arrow keys (Shift for bigger steps). Tap a pocket to aim for it, and tap it again to let the app choose.</p>
+          </div>
+          <div class="gb-read">
+            <div class="gb-seg" role="group" aria-label="Player level">
+              <button type="button" data-gb-skill="beginner" aria-pressed="false">Beginner</button>
+              <button type="button" data-gb-skill="club" aria-pressed="true">Club</button>
+              <button type="button" data-gb-skill="strong" aria-pressed="false">Strong</button>
+            </div>
+            <div class="gb-seg" role="group" aria-label="Shot type">
+              <button type="button" data-gb-kind="any" aria-pressed="true">Best</button>
+              <button type="button" data-gb-kind="direct" aria-pressed="false">Straight</button>
+              <button type="button" data-gb-kind="bank" aria-pressed="false">Bank</button>
+              <button type="button" data-gb-kind="kick" aria-pressed="false">Kick</button>
+            </div>
+            <div class="gb-big" aria-live="polite"><b data-gb="pct">–</b><span>pot chance<br><span data-gb="lvl">Club player</span></span></div>
+            <svg class="gb-bell" viewBox="0 0 320 110" role="img" aria-label="Spread of the object ball's direction, with the part inside the pocket window shaded"></svg>
+            <dl class="gb-dl">
+              <dt>Shot</dt><dd data-gb="shot">–</dd>
+              <dt>Pocket</dt><dd data-gb="pocket">–</dd>
+              <dt>Cut angle θ</dt><dd data-gb="cut">–</dd>
+              <dt>Pocket window</dt><dd data-gb="win">–</dd>
+              <dt>White’s margin</dt><dd data-gb="tol">–</dd>
+              <dt>Error magnified</dt><dd data-gb="mag">–</dd>
+              <dt>Object ball σ</dt><dd data-gb="sd">–</dd>
+            </dl>
+            <button class="btn btn-sm" type="button" data-gb-reset>Back to the sample shot</button>
+          </div>
+        </div>
+
+        <!-- ============ shot types ============ -->
+        <div class="gb-h"><h4>Beyond straight pots</h4><span class="gb-k">Real shots from the app</span></div>
+        <p class="gb-intro">Each one is the app’s own drawing, on a different sample table.</p>
+        <div class="gb-types">
+          <figure><img src="assets/img/ghostball/gb-type-direct.jpg" width="900" height="594" loading="lazy" alt="Straight pot drawn by the app: the white aims at a ghost ball and the red runs into the bottom-right pocket">
+            <figcaption><b>Straight <span>88%</span></b>Red into the bottom-right, a 56° cut with stun and a touch of left side.</figcaption></figure>
+          <figure><img src="assets/img/ghostball/gb-type-bank.jpg" width="900" height="594" loading="lazy" alt="Bank drawn by the app: the yellow comes off the bottom cushion and runs up into the top middle pocket">
+            <figcaption><b>Bank <span>43%</span></b>Yellow off the bottom cushion into the top middle. Top spin keeps the white out of the bottom-left.</figcaption></figure>
+          <figure><img src="assets/img/ghostball/gb-type-kick.jpg" width="900" height="594" loading="lazy" alt="Kick drawn by the app: the white comes off the bottom cushion before reaching the object ball">
+            <figcaption><b>Kick <span>71%</span></b>The white comes off the bottom cushion first, then pots the ball into the bottom-left.</figcaption></figure>
+          <figure><img src="assets/img/ghostball/gb-type-combo.jpg" width="900" height="594" loading="lazy" alt="Combination drawn by the app: the white hits a yellow, which knocks a red into the pocket">
+            <figcaption><b>Combination <span>93%</span></b>White into the yellow, yellow into the red, red into the bottom-right.</figcaption></figure>
+        </div>
+
+        <!-- ============ the app ============ -->
+        <div class="gb-h"><h4>Using it</h4><span class="gb-k">Built for one hand at the table</span></div>
+        <div class="gb-app">
+          <figure class="gb-phone"><img src="assets/img/ghostball/gb-phone.jpg" width="600" height="1300" loading="lazy" alt="The Ghost Ball app on a phone, showing the photo with the best shot drawn on it and the shot card below"></figure>
+          <div>
+            <ul class="gb-list">
+              <li><span class="gb-n">01</span><span><b>The shot card</b> gives the ball and pocket, the cut angle, the pot chance and the pace, with a close-up of the contact.</span></li>
+              <li><span class="gb-n">02</span><span><b>The spin guide</b>, a white ball with a red dot, shows where to strike the white, and the reason for it in plain words.</span></li>
+              <li><span class="gb-n">03</span><span><b>Your settings</b> change the answer. Pick UK 7ft, US 9ft or US 7ft, which colour you’re on, and your level, and the geometry and odds update.</span></li>
+              <li><span class="gb-n">04</span><span><b>Every other pot</b> is listed, most likely first. Tap one, or any ball on the photo, to see it drawn.</span></li>
+              <li><span class="gb-n">05</span><span><b>When it gets something wrong</b>, you can drag the corners, add or remove a ball, or tap the white yourself.</span></li>
+            </ul>
+            <div class="gb-shots">
+              <figure><img src="assets/img/ghostball/gb-closeup.jpg" width="900" height="566" loading="lazy" alt="The app's close-up of the contact: the dashed ghost ball touching the red, with the aim line and the path to the pocket"><figcaption>The close-up of the contact</figcaption></figure>
+              <figure><img src="assets/img/ghostball/gb-spin-top.jpg" width="900" height="270" loading="lazy" alt="The spin guide: a white ball with a red dot above centre, labelled Spin: Top, with the reason, stun would go in-off"><figcaption>The spin guide, with its reason</figcaption></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-pad caveats" style="margin-top:40px">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></div>
+          <div>
+            <h4>Honest caveats</h4>
+            <ul>
+              <li>The pot chances come from a <strong>model, not measured shots</strong>. The error spreads for each level are my estimates and haven’t been fitted to real players yet.</li>
+              <li>The physics is simplified: perfectly elastic collisions, ideal cushion reflections plus an error term, no swerve, and side spin only as a simple rule to cancel throw.</li>
+              <li>It has worked on a real table, but it needs a photo from roughly straight above with all four corner pockets in shot. Glare, unusual cloth colours or balls in the shadow of a cushion can fool it, which is why everything can be fixed by hand.</li>
+              <li>It doesn’t know the rules of a frame beyond which colour you’re on: no fouls, nominated balls or safety play.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ------------------------------------------------ 06 Rocket fin can (assets/js/fincan.js, assets/css/fincan.css) -->
+    <article class="po-panel" data-project="fincan" hidden>
+      <div class="wrap fc">
+        <header class="proj-head">
+          <h3 class="proj-title">Rocket fin can<span>A flight-simulated, flutter-checked fin can, generated in SolidWorks</span></h3>
+          <ul class="tags"><li>Python</li><li>SolidWorks API · C#</li><li>Flight simulation</li><li>Fin flutter</li><li>Structures</li><li>Personal project</li></ul>
+        </header>
+
+        <div class="viewer" id="fc-viewer">
+          <div class="viewer-stage" id="fc-stage">
+            <canvas id="fc-canvas" role="img" aria-label="Interactive 3D model of the rocket fin can"></canvas>
+            <div class="v-loading" id="fc-loading"><div class="bar"><i></i></div><span id="fc-loading-text">Loading 12 parts…</span></div>
+            <div class="v-title"><div class="label">Interactive model</div><p>Drag to rotate · click a part · thin the fins to make them flutter</p></div>
+            <div class="v-tools" role="toolbar" aria-label="Viewer controls">
+              <button type="button" data-act="explode" aria-pressed="false" title="Exploded view">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+                <span class="t-label">Explode</span>
+              </button>
+              <button type="button" data-act="xray" aria-pressed="true" title="See-through airframe">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span class="t-label">X-ray</span>
+              </button>
+              <button type="button" data-act="blueprint" aria-pressed="false" title="Show CAD edges only">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12m0 0l9-5M12 12L3 7"/></svg>
+                <span class="t-label">Blueprint</span>
+              </button>
+              <button type="button" data-act="reset" title="Reset the view and the flutter lab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></svg>
+                <span class="t-label">Reset</span>
+              </button>
+            </div>
+            <div class="v-hud fc-lab" id="fc-lab" role="group" aria-label="Flutter lab">
+              <span class="fc-lab-k">Flutter lab</span>
+              <label class="hud-speed"><span class="hud-k">Fin</span><input type="range" id="fc-t" min="1.6" max="6.4" step="0.1" value="4" aria-label="Fin thickness in millimetres"><span class="hud-v" id="fc-t-v">4.0 mm</span></label>
+              <div class="fc-mats" id="fc-mats" role="group" aria-label="Fin material"></div>
+              <span class="fc-verdict" id="fc-verdict" aria-live="polite"><b id="fc-margin">1.95×</b><span id="fc-state">Safe</span></span>
+            </div>
+            <div class="v-tip" id="fc-tip" hidden></div>
+          </div>
+          <aside class="viewer-side" aria-label="Fin can parts">
+            <div class="parts-head"><span class="label">Parts</span><span>8 groups · 12 parts</span></div>
+            <ul class="parts-list" id="fc-parts"></ul>
+          </aside>
+        </div>
+
+        <div class="fc-why">
+          <span class="label">Why I built it</span>
+          <blockquote><p>The day I got an interview for EirSpace’s structures team, I wanted to walk in with something that showed how I’d actually approach their work. So I designed the part of a rocket a structures team worries about most.</p></blockquote>
+        </div>
+        <p class="proj-lede">A fin can for a rocket like <strong>Bell Burnell</strong>, EirSpace’s current rocket. They publish a <strong>K700 motor, four fins and a 2 km target</strong>, and I sized everything else like a typical 4-inch, K-class student rocket. I wrote the flight simulation and the structural checks in Python, went through three design iterations, then <strong>generated the SolidWorks model from the same numbers</strong>, so the CAD can’t drift from the analysis.</p>
+
+        <div class="kpis reveal">
+          <div class="kpi"><span class="label">Apogee</span><b>2,000 m</b><p>On an AeroTech K700W: the 2 km target, with no ballast</p></div>
+          <div class="kpi"><span class="label">Flutter margin</span><b>1.95×</b><p>Flutter speed ÷ flight speed at the worst point. I required 1.5×</p></div>
+          <div class="kpi"><span class="label">Static margin</span><b>2.19 → 2.86</b><p>Calibers, from rail exit to burnout: inside the 1.5–3.0 band</p></div>
+          <div class="kpi"><span class="label">Lowest factor of safety</span><b>2.31</b><p>The aft centering ring at full thrust. Every case clears 2.0</p></div>
+        </div>
+
+        <!-- the flight -->
+        <div class="fc-h reveal">
+          <div><h4>The flight</h4><p>A 2-DOF simulation with the K700W’s certification thrust curve, the standard atmosphere and an OpenRocket-style drag build-up. Hover the chart to read any moment of the flight.</p></div>
+          <div class="seg" role="group" aria-label="What to plot" id="fc-flight-seg"></div>
+        </div>
+        <div class="ex-grid">
+          <div class="panel panel-pad reveal">
+            <h4 id="fc-flight-title">Altitude</h4>
+            <p class="sub" id="fc-flight-sub"></p>
+            <div class="chart" id="fc-flight"></div>
+          </div>
+          <div class="panel panel-pad reveal">
+            <h4>Flight numbers</h4>
+            <p class="sub">8.25 kg at lift-off, from a 6 m rail at 85°.</p>
+            <dl class="fc-stats">
+              <div><dt>Rail exit</dt><dd>37.5 <small>m/s</small></dd></div>
+              <div><dt>Peak acceleration</dt><dd>12.1 <small>g</small></dd></div>
+              <div><dt>Max speed</dt><dd>235 <small>m/s · Mach 0.69</small></dd></div>
+              <div><dt>Max dynamic pressure</dt><dd>32.5 <small>kPa</small></dd></div>
+              <div><dt>Burnout</dt><dd>3.59 <small>s · 564 m</small></dd></div>
+              <div><dt>Coast drag coefficient</dt><dd>0.57</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- choosing the fins -->
+        <div class="fc-h reveal">
+          <div><h4>Choosing the fins</h4><p>Every planform here was flown with the thinnest G10 sheet that keeps the flutter margin, so they’re all flight-worthy, and the trade is stability against apogee and mass. Hover a point to see its fins.</p></div>
+        </div>
+        <div class="ex-grid">
+          <div class="panel panel-pad reveal">
+            <h4>Design space · 26 planforms</h4>
+            <p class="sub">Static margin at rail exit against apogee. Dot size is the fin set’s mass.</p>
+            <ul class="legend"><li><span class="dotkey" style="background:#fafafa"></span>Needs 4.0 mm G10</li><li><span class="dotkey" style="background:#6b6b6b"></span>Needs 4.8 mm</li><li><span class="ring" style="border-color:var(--c-gbpjpy)"></span>My first two iterations</li></ul>
+            <div class="chart" id="fc-space"></div>
+          </div>
+          <div class="panel panel-pad reveal fc-plan" id="fc-plan" aria-live="polite"></div>
+        </div>
+        <div class="fc-iters">
+          <div class="fc-iter reveal"><span class="label">Iteration 1 · first guess</span><h5>Over-stable and short</h5><p>220/80 mm chords and a 105 mm span gave <b>3.0 calibers</b> at rail exit and <b>1,847 m</b>. Big fins cost drag and mass, and their higher aspect ratio needed 4.8 mm sheet to stop them fluttering.</p></div>
+          <div class="fc-iter reveal"><span class="label">Iteration 2 · chamfered trailing edges</span><h5>+55 m for free</h5><p>A square trailing edge leaves base drag behind it. Chamfering it took the same fins to <b>1,902 m</b> with no extra mass.</p></div>
+          <div class="fc-iter win reveal"><span class="label">Iteration 3 · a 24-planform sweep</span><h5>Smaller fins fixed everything</h5><p>200/80 mm chords and an 80 mm span: <b>2.19 calibers</b> and <b>2,000 m</b>, and the lower aspect ratio let the fins drop to <b>4.0 mm</b>, saving 266 g.</p></div>
+        </div>
+
+        <!-- flutter -->
+        <div class="fc-h reveal">
+          <div><h4>Fin flutter: the sizing case</h4><p>Flutter is a bending–torsion oscillation that feeds on the airflow and can strip fins in a few cycles. I checked it at every point of the flight with NACA TN 4197, using the local air pressure and speed of sound. The flutter lab in the model above runs the same maths.</p></div>
+        </div>
+        <div class="ex-grid">
+          <div class="panel panel-pad reveal">
+            <h4>Flutter speed vs fin thickness</h4>
+            <p class="sub" id="fc-flutter-sub">At the worst point of the flight, just after max speed.</p>
+            <ul class="legend" id="fc-flutter-legend"></ul>
+            <div class="chart" id="fc-flutter"></div>
+          </div>
+          <div class="panel panel-pad reveal">
+            <h4>Thinnest sheet that passes</h4>
+            <p class="sub">Each material at its lightest safe thickness, flown in the simulation.</p>
+            <div class="table-wrap"><table class="fc-table" id="fc-trades"></table></div>
+            <p class="sub" style="margin:16px 0 0">I chose <b style="color:var(--ink);font-weight:600">G10</b>. Carbon and aluminium are lighter for the same margin, but G10 is cheap, easy to cut and bevel, bonds well into a glass airframe and is what student teams already use. 3.2 mm carbon is the upgrade if the last 35 m matters.</p>
+          </div>
+        </div>
+
+        <!-- loads -->
+        <div class="fc-h reveal">
+          <div><h4>Structural load cases</h4><p>Hand calculations, each set up to be conservative. The nominal cases need a factor of safety of 2.0. The drogue-failure case, with the main parachute opening at 45 m/s (98 g), only has to survive.</p></div>
+        </div>
+        <div class="ex-grid">
+          <div class="panel panel-pad reveal">
+            <h4>Factor of safety, every case</h4>
+            <p class="sub">Log scale. Red tick: the requirement. Dotted line: failure.</p>
+            <div class="chart" id="fc-loads"></div>
+          </div>
+          <div class="panel panel-pad reveal">
+            <h4>What the numbers say</h4>
+            <p class="sub">The design recovery load is 2,068 N (30 g), when the main opens at the drogue’s 25 m/s.</p>
+            <ul class="fc-says">
+              <li><b>The aft centering ring is the critical part</b> (FoS 2.31) if it alone carries the 1,617 N design thrust. I solved the axisymmetric plate-bending equation for it, and checked my solver against Timoshenko’s closed-form solution.</li>
+              <li><b>The U-bolt washers are the weak point in a drogue failure</b> (FoS 1.62 against pulling through the 12 mm ply). A bigger backing plate would be a cheap fix.</li>
+              <li><b>Fin bending isn’t close to critical</b> (FoS 152), so fin thickness should be set by flutter and handling, not strength.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- how it was built -->
+        <div class="build-grid" style="margin-top:72px">
+          <div class="panel panel-pad reveal">
+            <h4>How it was built</h4>
+            <p class="sub">One set of numbers drives the analysis, the CAD, the report and this page.</p>
+            <ol class="steps">
+              <li><h5>One design file</h5><p>Every input and assumption lives in <b>design.py</b>: motor, airframe, fin planform, materials and the design rules.</p></li>
+              <li><h5>Physics in Python</h5><p>Standard atmosphere, Barrowman stability, a drag build-up, an <b>RK4 flight simulation</b>, NACA TN 4197 flutter and an <b>axisymmetric plate solver</b>, each checked against a known result.</p></li>
+              <li><h5>CAD from the numbers</h5><p>The analysis writes <b>design.txt</b>, and a <b>C# program drives the SOLIDWORKS API</b> to build 8 parts and a 12-part assembly from it, check for clashes and export a STEP file.</p></li>
+              <li><h5>Report and this page</h5><p>The same results become a 7-page design report, and the model, charts and flutter lab here.</p></li>
+            </ol>
+          </div>
+          <div class="panel panel-pad reveal">
+            <div class="code-cap"><span>physics.py · the NACA TN 4197 flutter boundary</span><span>Python</span></div>
+<pre class="code"><code><span class="k">def</span> <span class="f">flutter_speed</span>(G, t, fins, pressure, sound_speed):
+    <span class="c"># flat plate, cantilevered at the root</span>
+    g = <span class="f">fin_geometry</span>(fins[<span class="t">"cr"</span>], fins[<span class="t">"ct"</span>], fins[<span class="t">"s"</span>], fins[<span class="t">"sweep"</span>])
+    ar, lam = g[<span class="t">"ar"</span>], g[<span class="t">"taper"</span>]
+    tc = t / fins[<span class="t">"cr"</span>]      <span class="c"># thickness ratio on the root chord</span>
+    denom = (<span class="t">39.3</span> * ar**<span class="t">3</span> / (tc**<span class="t">3</span> * (ar + <span class="t">2</span>))
+             * (lam + <span class="t">1</span>) / <span class="t">2</span> * pressure / P0)
+    <span class="k">return</span> sound_speed * math.<span class="f">sqrt</span>((G / PSI) / denom)</code></pre>
+            <p class="sub" style="margin:14px 0 0">The flutter lab runs this over the whole trajectory every time you move its slider, so the margin it shows is the minimum over the flight, not just at max speed.</p>
+          </div>
+        </div>
+
+        <div class="renders reveal">
+          <figure><img src="assets/img/fincan-hero.jpg" alt="SOLIDWORKS render of the fin can: airframe, four swept fins and the motor retainer" loading="lazy" width="977" height="549"><figcaption>SOLIDWORKS · fin can</figcaption></figure>
+          <figure><img src="assets/img/fincan-xray.jpg" alt="SOLIDWORKS x-ray render showing the motor mount tube, centering rings, through-the-wall fin tabs and the U-bolt" loading="lazy" width="977" height="549"><figcaption>SOLIDWORKS · x-ray: rings, tabs, U-bolt</figcaption></figure>
+          <figure><img src="assets/img/fincan-exploded.jpg" alt="SOLIDWORKS exploded render: the motor mount assembly slid out of the aft end, fins moved outward" loading="lazy" width="983" height="552"><figcaption>SOLIDWORKS · exploded build order</figcaption></figure>
+        </div>
+
+        <div class="panel panel-pad fc-report reveal">
+          <div><h4>The design report</h4><p>Seven pages: the assumptions, the flight, the three iterations, flutter, every load case, the CAD, and how I’d build and test it.</p></div>
+          <a class="btn btn-primary" href="assets/docs/fin-can-design-study.pdf" target="_blank" rel="noopener">
+            Read the report (PDF)
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+
+        <div class="panel panel-pad caveats reveal">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></div>
+          <div>
+            <h4>Honest caveats</h4>
+            <ul>
+              <li>Only the <strong>K700 motor, four fins and 2 km target</strong> are EirSpace’s numbers. The airframe, mass budget, materials and recovery set-up are my assumptions for a typical 4-inch, K-class rocket, and I don’t know the real “Katana” fin planform.</li>
+              <li>Barrowman ignores body lift and compressibility, and NACA TN 4197 treats the fin as a flat plate. They’re standard first-pass tools, which is why I kept a 1.5× flutter margin.</li>
+              <li>The load cases are hand calculations, not FEA, and none of this has been built or tested yet. The aft ring and the U-bolt are the first things I’d proof-test.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ================================================================ ZETO -->
+    <article class="po-panel" data-project="zeto" hidden>
+      <div class="wrap zt">
+        <header class="proj-head">
+          <h3 class="proj-title">Zeto<span>A team-built internship tracker that keeps itself in sync with Notion</span></h3>
+          <ul class="tags"><li>Team of five</li><li>Notion hackathon</li><li>Lovable</li><li>Notion API</li><li>React · TypeScript</li><li>AI-assisted development</li></ul>
+        </header>
+
+        <p class="proj-lede">At a Notion hackathon, five of us built <strong>Zeto</strong> (Greek for “I seek”): one place to find biomedical and engineering placements in Ireland and track each application <strong>from prep to offer</strong>. The website is where you work, and <strong>Notion is the live database and dashboard behind it</strong>. Track a placement on the site and it lands in Notion; change it in Notion and the site picks it up.</p>
+
+        <figure class="zt-video">
+          <div class="zt-frame">
+            <video id="zt-video" controls playsinline preload="none" poster="assets/img/zeto/zeto-poster.jpg" aria-label="Zeto launch video, 46 seconds, with optional captions">
+              <source src="assets/media/zeto/zeto-launch.mp4" type="video/mp4">
+              <track kind="captions" src="assets/media/zeto/zeto-launch.en.vtt" srclang="en" label="English">
+            </video>
+          </div>
+          <figcaption>Our 46-second launch video, made with Claude. The narration is a text-to-speech voice; turn on captions with the CC button.</figcaption>
+          <details class="tv zt-transcript">
+            <summary>Read the transcript</summary>
+            <p>Five students. One hackathon. Let’s fix the internship hunt.</p>
+            <p>Meet Zeto. It helps students seek, and sign, internships. Search biomedical and engineering placements across Ireland, as you type. Found one? Track it in one click. It lands straight in Notion, our live database.</p>
+            <p>Then move it along. Prep. Submitted. Interview. Offer! And Notion doubles as your dashboard. Every status, every deadline, always in sync.</p>
+            <p>We built the site in Lovable, synced it with Notion, and made this video with Claude. Zeto. From seeking, to signed.</p>
+          </details>
+        </figure>
+
+        <div class="kpis reveal">
+          <div class="kpi"><span class="label">Team</span><b>5 students</b><p>Built together at a Notion hackathon</p></div>
+          <div class="kpi"><span class="label">Placements</span><b>25</b><p>Sample listings across five fields, from Pfizer to Arup</p></div>
+          <div class="kpi"><span class="label">Stages</span><b>4</b><p>Prep, Submitted, Interview, Offer</p></div>
+          <div class="kpi"><span class="label">Sync</span><b>Two-way</b><p>Website and Notion, every 30 seconds and whenever you come back to the tab</p></div>
+        </div>
+
+        <!-- what it does -->
+        <div class="zt-h reveal">
+          <h4>What it does</h4>
+          <p>Placement listings, deadlines and your progress usually live on a dozen employer sites and a spreadsheet. Zeto puts them in one list and walks each application through four stages.</p>
+        </div>
+        <ul class="zt-feats">
+          <li class="reveal"><span class="zt-n">01</span><h5>Search and filter</h5><p>By name, organisation, field, location or pay, with a filter for each of the five fields. Hover a placement’s name for a short blurb about the employer.</p></li>
+          <li class="reveal"><span class="zt-n">02</span><h5>Track in one click</h5><p>Track adds a placement to your applications, and a row to the Applications table in Notion.</p></li>
+          <li class="reveal"><span class="zt-n">03</span><h5>Move it along</h5><p>A status badge steps it from Prep to Offer, with a checklist for your CV, cover letter and references, and notes.</p></li>
+          <li class="reveal"><span class="zt-n">04</span><h5>A dashboard that keeps up</h5><p>A status ring, your totals and the next deadline update as you go. Deadlines within 14 days turn red.</p></li>
+          <li class="reveal"><span class="zt-n">05</span><h5>Offers and a calendar</h5><p>Compare offers side by side with their accept-by dates, and see every deadline on a calendar.</p></li>
+          <li class="reveal"><span class="zt-n">06</span><h5>Notion as the back office</h5><p>Internships, Applications, a Dashboard summary and a calendar view in Notion, all kept in step with the site.</p></li>
+        </ul>
+
+        <div class="zt-shots">
+          <figure class="reveal"><img src="assets/img/zeto/zeto-search-notion.jpg" alt="Zeto's Internships tab filtered to Shannon, beside Notion's Applications table, where the newly tracked Aircraft Systems Intern row is highlighted" loading="lazy" width="1400" height="694"><figcaption>Track a placement on the site, and the row appears in Notion</figcaption></figure>
+          <figure class="reveal"><img src="assets/img/zeto/zeto-stages-notion.jpg" alt="Zeto's Applications list with progress bars from Prep to Offer, beside the same five applications and their statuses in Notion" loading="lazy" width="1400" height="694"><figcaption>Each step from Prep to Offer is mirrored in Notion</figcaption></figure>
+        </div>
+        <p class="zt-note">Stills from the launch video.</p>
+
+        <!-- the hard part -->
+        <div class="zt-h reveal">
+          <h4>The hard part: two copies of the truth</h4>
+          <p>The site and Notion both hold the same applications, and five of us were editing both at once. Most of the work went into making them agree.</p>
+        </div>
+        <div class="zt-sync">
+          <section class="panel panel-pad reveal">
+            <h5>Stale tabs</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>An old tab could push its out-of-date list and undo a teammate’s changes in Notion.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>Every sync is <b>pull, merge, then push</b>, and it only pushes if something has changed since its own last push.</p>
+          </section>
+          <section class="panel panel-pad reveal">
+            <h5>Who wins a clash</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>The same application can change on the site and in Notion at the same time.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>Each application remembers when it was last edited <b>on the site</b>, and that’s compared with the Notion row’s last-edited time. Values pulled from Notion never update it, so a change can’t echo back and forth.</p>
+          </section>
+          <section class="panel panel-pad reveal">
+            <h5>Deleted or just missing?</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>A row missing from Notion could mean someone deleted it, or that it was never sent.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>It only counts as deleted if it was in the last push and nobody has touched it on the site since. Removing something on the site records the time, so the next pull can’t bring it back.</p>
+          </section>
+          <section class="panel panel-pad reveal">
+            <h5>Duplicate tables</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>Notion’s search lags behind new tables, so the sync kept creating duplicates.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>It finds its tables as <b>children of our hackathon page</b> instead. Renaming one keeps the old title as a lookup key, so the table is renamed in place, not created again.</p>
+          </section>
+          <section class="panel panel-pad reveal">
+            <h5>Rate limits</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>Notion allows about three requests a second for the whole connection, shared by every open tab.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>Every call goes through one queue and sync cycles never overlap. It polls every 30 seconds only while the tab is visible, caches table ids, and waits for Notion’s Retry-After before trying again.</p>
+          </section>
+          <section class="panel panel-pad reveal">
+            <h5>Teammates’ own columns</h5>
+            <p class="zt-q"><span class="zt-tag">Problem</span>We each added views and columns in Notion as we worked.</p>
+            <p class="zt-a"><span class="zt-tag fix">Fix</span>The sync only ever <b>adds</b> missing properties. It never removes or renames one, so nobody’s Notion setup gets wiped.</p>
+          </section>
+        </div>
+
+        <!-- how it was built -->
+        <div class="build-grid" style="margin-top:72px">
+          <div class="panel panel-pad reveal">
+            <h4>How it was built</h4>
+            <p class="sub">A website for doing the work, Notion for seeing it, and a video to pitch it.</p>
+            <ol class="steps">
+              <li><h5>The website, in Lovable</h5><p>React and TypeScript on TanStack Start, with separate pages for the dashboard, internships, applications, offers and a calendar.</p></li>
+              <li><h5>Notion through the server</h5><p>Server functions talk to Notion’s API through Lovable’s Notion connector, so <b>no Notion keys ever reach the browser</b>.</p></li>
+              <li><h5>Notion as database and dashboard</h5><p>The sync keeps four things up to date: the Internships and Applications tables, a Dashboard summary, and a calendar of deadlines and accept-by dates.</p></li>
+              <li><h5>The launch video, with Claude</h5><p>Our build timelapse, the app’s screens and Notion, cut to a voiceover and music for the judges.</p></li>
+            </ol>
+          </div>
+          <div class="panel panel-pad reveal">
+            <div class="code-cap"><span>hooks.ts · one sync cycle</span><span>TypeScript</span></div>
+<pre class="code"><code><span class="c">// pull → merge → push (only if different from the last push). Never overlaps itself.</span>
+<span class="k">const</span> <span class="f">cycle</span> = <span class="f">useCallback</span>(<span class="k">async</span> () =&gt; {
+  <span class="k">if</span> (running.current) { pending.current = <span class="t">true</span>; <span class="k">return</span>; }
+  running.current = <span class="t">true</span>;
+  <span class="k">const</span> { rows, tracked } = <span class="k">await</span> <span class="f">runPull</span>();
+  <span class="k">const</span> merged = <span class="f">merge</span>(ref.current, rows, tracked);
+  <span class="k">if</span> (merged) <span class="f">commit</span>(merged);
+  <span class="k">const</span> p = <span class="f">payload</span>(ref.current);
+  <span class="k">if</span> (JSON.<span class="f">stringify</span>(p) !== JSON.<span class="f">stringify</span>(ref.current.lastPushed)) {
+    <span class="k">await</span> <span class="f">runPush</span>({ data: p });
+    <span class="f">commit</span>({ ...ref.current, lastPushed: p, lastPushAt: Date.<span class="f">now</span>() });
+  }
+  running.current = <span class="t">false</span>;
+  <span class="k">if</span> (pending.current) { pending.current = <span class="t">false</span>; <span class="k">void</span> <span class="f">cycle</span>(); }
+}, []);</code></pre>
+            <p class="sub" style="margin:14px 0 0">Shortened from our code (status messages and error handling removed). A cycle runs on load, after each edit, every 30 seconds while the tab is visible, and when you come back to the tab.</p>
+          </div>
+        </div>
+
+        <!-- team -->
+        <div class="panel panel-pad zt-team reveal">
+          <div>
+            <span class="label">The team</span>
+            <h4>Anish&nbsp;A · Tanmai&nbsp;H · Nihal&nbsp;M · Ryan&nbsp;J · Jovan&nbsp;T</h4>
+          </div>
+          <p>From our shared roadmap: Ryan built the calendar page, its Notion calendar and the site’s animations, Nihal designed the navy colour palette, and I added the demo page and made the launch video.</p>
+        </div>
+
+        <div class="panel panel-pad caveats reveal">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></div>
+          <div>
+            <h4>Honest caveats</h4>
+            <ul>
+              <li>The 25 placements are <strong>sample data</strong>. The deadlines and pay are estimates, so check each organisation’s own site.</li>
+              <li>It’s a hackathon build: there are no accounts yet, so your tracked applications live in your browser and in one shared Notion workspace.</li>
+              <li>Zeto isn’t published. It ran from Lovable’s preview for the judges, and since every visit syncs with our team’s Notion, there’s no public demo here. The video shows it working.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</body>
+</html>

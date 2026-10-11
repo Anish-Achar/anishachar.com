@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy, terms &amp; accessibility · Anish Achar</title>
+<meta name="description" content="How Anish Achar's website handles your data (it collects none), the terms for using it, its accessibility, and credits for the fonts and libraries it uses.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://anishachar.com/legal">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root { color-scheme: dark; --ink: #fafafa; --ink-2: #b8b8b8; --muted: #949494; --line: rgba(255, 255, 255, 0.12); --line-2: rgba(255, 255, 255, 0.26); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: #000; color: var(--ink-2); font: 400 16px/1.7 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--ink); }
+  :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+  .skip { position: absolute; left: 16px; top: -60px; padding: 10px 16px; border-radius: 999px; background: #fff; color: #000; text-decoration: none; font-weight: 500; z-index: 10; }
+  .skip:focus { top: 12px; }
+  header { position: sticky; top: 0; z-index: 5; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 760px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 600; }
+  .brand b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #fff; color: #000; font: 700 12.5px/1 "Inter", sans-serif; letter-spacing: -0.03em; }
+  .back { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .back:hover { background: #151515; }
+  main { max-width: 760px; margin: 0 auto; padding: clamp(40px, 7vw, 72px) clamp(16px, 4vw, 32px) 80px; }
+  h1 { margin: 0 0 10px; color: var(--ink); font-size: clamp(32px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.04em; font-weight: 700; }
+  .updated { margin: 0 0 28px; color: var(--muted); font-size: 14px; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 40px; padding: 0; list-style: none; }
+  .toc a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--line-2); border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500; }
+  .toc a:hover { background: #151515; }
+  section { padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--line); }
+  h2 { margin: 0 0 14px; color: var(--ink); font-size: 26px; line-height: 1.2; letter-spacing: -0.03em; font-weight: 600; }
+  h3 { margin: 28px 0 8px; color: var(--ink); font-size: 17px; line-height: 1.35; font-weight: 600; }
+  p, ul { margin: 0 0 14px; }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+  strong { color: var(--ink); font-weight: 600; }
+  code { font: 500 0.88em ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--ink); background: #151515; padding: 2px 6px; border-radius: 6px; }
+  .short { padding: 18px 20px; border: 1px solid var(--line-2); border-radius: 14px; background: #0c0c0c; }
+  .short p { margin: 0; }
+  footer { max-width: 760px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px) 40px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="bar">
+    <a class="brand" href="index.html"><b>AA</b>anish.achar</a>
+    <a class="back" href="index.html">Back to the site</a>
+  </div>
+</header>
+
+<main id="main">
+  <h1>Privacy, terms &amp; accessibility</h1>
+  <p class="updated">Last updated 7 October 2026</p>
+  <ul class="toc" aria-label="On this page">
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#terms">Terms of use</a></li>
+    <li><a href="#accessibility">Accessibility</a></li>
+    <li><a href="#credits">Credits &amp; licences</a></li>
+  </ul>
+
+  <!-- ============================================================ privacy -->
+  <section id="privacy" aria-labelledby="privacy-h">
+    <h2 id="privacy-h">Privacy</h2>
+    <div class="short"><p><strong>The short version:</strong> this site has no accounts, forms, analytics, adverts or tracking cookies. I don't collect your personal data through it.</p></div>
+
+    <h3>Who I am</h3>
+    <p>This is the personal website of Anish Achar, a student in Dublin, Ireland. For anything to do with your data, I'm the person responsible (the "controller" under the GDPR), and you can reach me at <a href="mailto:anishacharuw@gmail.com">anishacharuw@gmail.com</a>.</p>
+
+    <h3 id="cookies">Cookies and what's stored on your device</h3>
+    <p>The site sets <strong>no cookies</strong>. It keeps two small notes in your own browser, which are never sent to me or anyone else:</p>
+    <ul>
+      <li><code>motion</code> (local storage): remembers whether you switched animations on or off with the Motion switch. It stays until you clear your browser's data for this site.</li>
+      <li><code>intro</code> (session storage): remembers that you've seen the opening animation, so it only plays once per visit. It's deleted when you close the tab.</li>
+    </ul>
+    <p>Both exist only to make features you use work, so no consent banner is needed.</p>
+
+    <h3>Hosting</h3>
+    <p>Like every website, this one is delivered by a web host. When your browser asks for a page, the host necessarily receives your IP address and basic request details (such as your browser type and the time), and may keep them in short-lived security logs. I don't use those logs to identify or track anyone.</p>
+
+    <h3>No other companies</h3>
+    <p>Everything the site needs, including its fonts and code libraries, is served from the site itself. Your browser doesn't contact Google, a font service, an analytics company or anyone else while you're here. It only leaves the site if you follow a link, such as the one to LinkedIn.</p>
+
+    <h3>Ghost Ball (the pool app)</h3>
+    <p>Photos you take or choose in Ghost Ball are processed entirely inside your browser. They're <strong>never uploaded</strong>, stored or seen by me. "Save image" saves the result straight to your own device.</p>
+
+    <h3>If you email me</h3>
+    <p>I'll receive your email address and whatever you write, through Gmail (Google). I use it only to reply to you and keep it only as long as the conversation needs. Under the GDPR my reason for this is my legitimate interest in answering messages sent to me.</p>
+
+    <h3>Links to other sites</h3>
+    <p>Links to LinkedIn and other sites take you outside this one, where their own privacy policies apply.</p>
+
+    <h3 id="your-rights">Your rights, and deleting your data</h3>
+    <p>You can ask to see, correct or delete any personal data I hold about you, to restrict or object to how I use it, or to get a copy. In practice, the only data I could hold is emails you've sent me.</p>
+    <p><strong>To ask for deletion</strong>, email <a href="mailto:anishacharuw@gmail.com?subject=Delete%20my%20data">anishacharuw@gmail.com</a> with the subject "Delete my data". I'll delete your messages and confirm within one month.</p>
+    <p>If you're unhappy with how I've handled your data, you can complain to Ireland's <a href="https://www.dataprotection.ie" rel="noopener" target="_blank">Data Protection Commission</a>.</p>
+
+    <h3>Children</h3>
+    <p>This site doesn't collect personal data from anyone, including children, and there's nothing to sign up for.</p>
+
+    <h3>Changes</h3>
+    <p>If anything here changes, I'll update this page and the date at the top.</p>
+  </section>
+
+  <!-- ============================================================ terms -->
+  <section id="terms" aria-labelledby="terms-h">
+    <h2 id="terms-h">Terms of use</h2>
+    <p>By using this site you agree to these simple terms.</p>
+
+    <h3>My work</h3>
+    <p>Unless I say otherwise, the writing, images, CAD renders, video and code on this site are © 2026 Anish Achar. You're welcome to link to the site and to share pages with credit. Please ask before republishing my work elsewhere.</p>
+
+    <h3>Ghost Ball</h3>
+    <p>Ghost Ball is a free personal project, provided "as is", without warranties of any kind. Its pot chances are estimates from a mathematical model, not guarantees, and it can misread a photo.</p>
+
+    <h3>The trading project</h3>
+    <p>The NO Candle Strategy pages describe my own project for information and education only. They are <strong>not financial advice</strong> or a recommendation to buy, sell or trade anything. The results are hypothetical backtests on a simulated account, not real trading, and past results don't predict future ones. Trading forex with leverage carries a high risk of losing money.</p>
+
+    <h3>The rocket fin can</h3>
+    <p>The fin can is a personal design study for a rocket like EirSpace’s Bell Burnell, based on assumptions I state on the page. It hasn’t been built, tested or reviewed by EirSpace or anyone else, so please don’t build or fly anything from it without a proper engineering review. Model rocketry should follow your national association’s safety code.</p>
+
+    <h3>No liability</h3>
+    <p>I try to keep everything here accurate, but I can't promise it's complete or error-free, and to the extent the law allows I'm not liable for losses that come from relying on it. I'm not responsible for the content of other sites I link to.</p>
+
+    <h3>Trademarks</h3>
+    <p>SOLIDWORKS, TradingView, TikTok, SimpleStudy, LinkedIn, EirSpace, AeroTech, Notion, Lovable, Claude and other names mentioned belong to their owners. I use them only to describe my own work; it doesn't imply they endorse me.</p>
+
+    <h3>Law</h3>
+    <p>These terms are governed by the law of Ireland.</p>
+  </section>
+
+  <!-- ============================================================ accessibility -->
+  <section id="accessibility" aria-labelledby="a11y-h">
+    <h2 id="a11y-h">Accessibility</h2>
+    <p>I want everyone to be able to use this site, and I aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. So far:</p>
+    <ul>
+      <li>Everything works with a keyboard, with a visible focus outline and a "Skip to content" link. Escape closes an open project. The 3D models (the engine and the fin can) turn with the arrow keys, and the Ghost Ball balls move with them.</li>
+      <li>Images have text descriptions, and the key trading charts come with tables of the same numbers.</li>
+      <li>Text on the main site meets AA contrast against its background.</li>
+      <li>The Ghost Ball video has subtitles built in and a written transcript under it.</li>
+      <li>The Motion switch at the top of the main site turns the animations off, and the site also follows your device's reduced-motion setting.</li>
+    </ul>
+    <p><strong>Known limits:</strong> the 3D model and the drag-the-balls demo are visual by nature. The text, renders and tables around them describe the same work.</p>
+    <p>If something doesn't work for you, please <a href="mailto:anishacharuw@gmail.com?subject=Accessibility">email me</a> and I'll fix it.</p>
+  </section>
+
+  <!-- ============================================================ credits -->
+  <section id="credits" aria-labelledby="credits-h">
+    <h2 id="credits-h">Credits &amp; licences</h2>
+    <h3>Typefaces</h3>
+    <p>Inter, JetBrains Mono, and in Ghost Ball, Big Shoulders Display, IBM Plex Mono and Public Sans. All are free under the <a href="https://openfontlicense.org" rel="noopener" target="_blank">SIL Open Font License 1.1</a>, and copies are hosted on this site.</p>
+    <h3>Code libraries</h3>
+    <ul>
+      <li><a href="https://threejs.org" rel="noopener" target="_blank">three.js</a> 0.169: the 3D viewers. MIT licence, © 2010–2024 the three.js authors (<a href="assets/vendor/three/LICENSE.txt">licence text</a>).</li>
+      <li><a href="https://lenis.darkroom.engineering" rel="noopener" target="_blank">Lenis</a> 1.3: smooth scrolling. MIT licence, © darkroom.engineering (<a href="assets/vendor/lenis/LICENSE.txt">licence text</a>).</li>
+    </ul>
+    <h3>Data</h3>
+    <p>The fin can’s flight simulation uses AeroTech’s certification thrust curve for the K700W motor, from <a href="https://www.thrustcurve.org" rel="noopener" target="_blank">ThrustCurve.org</a>.</p>
+    <h3>Images and video</h3>
+    <p>The CAD renders, app screenshots, diagrams and videos are my own. The Ghost Ball reel's narration is an AI-generated voice, made with Higgsfield. The TikTok images are screenshots of my own videos, and the SimpleStudy email is shown to document my ambassador role.</p>
+    <p>Zeto was built with my hackathon teammates Tanmai H, Nihal M, Ryan J and Jovan T, and its launch video includes footage of our team. The video's narration is Microsoft's "Andrew" text-to-speech voice, and its music is "Happy Beats / Business Moves vol. 11" from <a href="https://ende.app/en" rel="noopener" target="_blank">ende.app</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Anish Achar · Dublin, Ireland · <a href="index.html">Back to the site</a></p>
+</footer>
+</body>
+</html>

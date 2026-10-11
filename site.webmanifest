@@ -1,0 +1,21 @@
+{
+  "name": "Anish Achar",
+  "short_name": "Anish Achar",
+  "description": "Computer Science & Business at Trinity College Dublin: a V8 engine in SolidWorks, an algorithmic trading strategy and Ghost Ball, a computer-vision pool app.",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

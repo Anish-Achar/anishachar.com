@@ -1,0 +1,23 @@
+{"unit":"mm","parts":[
+{"name":"Airframe (fin can section)","faces":20,"tris":328,"edgeCount":52,"volumeCm3":362.9141,"areaCm2":4068.8491,"features":["Tube","Fin Slots"],"groups":[{"rgb":[0.9294,0.9294,0.9176],"shine":0.5,"alpha":1,"nv":344,"ni":984,"wide":false,"pos":0,"nrm":4128,"idx":5160}],"edges":{"off":7128,"n":940}},
+{"name":"Motor Mount Tube","faces":4,"tris":212,"edgeCount":4,"volumeCm3":147.7805,"areaCm2":2116.0763,"features":["Tube"],"groups":[{"rgb":[0.8,0.8275,0.7373],"shine":0.4,"alpha":1,"nv":212,"ni":636,"wide":false,"pos":18408,"nrm":20952,"idx":21588}],"edges":{"off":22860,"n":476}},
+{"name":"Centering Ring 6 mm","faces":4,"tris":296,"edgeCount":4,"volumeCm3":30.1018,"areaCm2":129.7069,"features":["Ring"],"groups":[{"rgb":[0.8392,0.698,0.4863],"shine":0.2,"alpha":1,"nv":296,"ni":888,"wide":false,"pos":28572,"nrm":32124,"idx":33012}],"edges":{"off":34788,"n":660}},
+{"name":"Forward Ring - Recovery Bulkhead","faces":6,"tris":496,"edgeCount":8,"volumeCm3":59.4072,"areaCm2":162.6483,"features":["Ring","U-bolt Holes"],"groups":[{"rgb":[0.8392,0.698,0.4863],"shine":0.2,"alpha":1,"nv":488,"ni":1488,"wide":false,"pos":42708,"nrm":48564,"idx":50028}],"edges":{"off":53004,"n":852}},
+{"name":"Fin","faces":10,"tris":28,"edgeCount":24,"volumeCm3":59.964,"areaCm2":321.7729,"features":["Fin Plate"],"groups":[{"rgb":[0.1098,0.2078,0.3373],"shine":0.5,"alpha":1,"nv":48,"ni":84,"wide":false,"pos":63228,"nrm":63804,"idx":63948}],"edges":{"off":64116,"n":48}},
+{"name":"Motor Retainer","faces":8,"tris":624,"edgeCount":8,"volumeCm3":16.2873,"areaCm2":137.4786,"features":["Retainer"],"groups":[{"rgb":[0.7176,0.7373,0.7686],"shine":0.8,"alpha":1,"nv":624,"ni":1872,"wide":false,"pos":64692,"nrm":72180,"idx":74052}],"edges":{"off":77796,"n":944}},
+{"name":"K700W Motor (reference)","faces":10,"tris":460,"edgeCount":9,"volumeCm3":1297.4265,"areaCm2":1021.9542,"features":["Motor Case","Nozzle"],"groups":[{"rgb":[0.6196,0.1176,0.1176],"shine":0.6,"alpha":1,"nv":462,"ni":1380,"wide":false,"pos":89124,"nrm":94668,"idx":96056}],"edges":{"off":98816,"n":874}},
+{"name":"U-bolt M6","faces":25,"tris":2240,"edgeCount":24,"volumeCm3":5.7548,"areaCm2":47.6939,"features":["Bend","Half Bend","Leg A","Top Washer A","Bottom Washer A","Nut A","Leg B","Top Washer B","Bottom Washer B","Nut B"],"groups":[{"rgb":[0.698,0.7098,0.7294],"shine":0.9,"alpha":1,"nv":1714,"ni":6720,"wide":false,"pos":109304,"nrm":129872,"idx":135016}],"edges":{"off":148456,"n":1152}}
+],"instances":[
+{"part":"Fin","name":"Fin-3","x":[-1,0,0],"y":[0,1,0],"z":[0,0,-1],"t":[0,0,0]},
+{"part":"Fin","name":"Fin-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,0,0]},
+{"part":"Fin","name":"Fin-2","x":[0,0,1],"y":[0,1,0],"z":[-1,0,0],"t":[0,0,0]},
+{"part":"Motor Mount Tube","name":"Motor Mount Tube-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,0,0]},
+{"part":"Airframe (fin can section)","name":"Airframe (fin can section)-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,0,0]},
+{"part":"Centering Ring 6 mm","name":"Centering Ring 6 mm-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,20,0]},
+{"part":"Centering Ring 6 mm","name":"Centering Ring 6 mm-2","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,220,0]},
+{"part":"Forward Ring - Recovery Bulkhead","name":"Forward Ring - Recovery Bulkhead-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,588,0]},
+{"part":"Fin","name":"Fin-4","x":[0,0,-1],"y":[0,1,0],"z":[1,0,0],"t":[0,0,0]},
+{"part":"Motor Retainer","name":"Motor Retainer-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,0,0]},
+{"part":"K700W Motor (reference)","name":"K700W Motor (reference)-1","x":[1,0,0],"y":[0,1,0],"z":[0,0,1],"t":[0,0,0]},
+{"part":"U-bolt M6","name":"U-bolt M6-1","x":[-0.7071,0,0.7071],"y":[0,1,0],"z":[-0.7071,0,-0.7071],"t":[26.4207,600,26.4207]}
+]}
